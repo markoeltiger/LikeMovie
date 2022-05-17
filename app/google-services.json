@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1094318557689",
+    "project_id": "likemovies-7fee4",
+    "storage_bucket": "likemovies-7fee4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094318557689:android:3069d706731f784b49d528",
+        "android_client_info": {
+          "package_name": "com.mark.likemovies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094318557689-9hs4rda51ms19e8fl9lhj541dnlnlo7p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5VG0mNNPTEM-kZ7CFCZmliUSrL9FxBK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094318557689-9hs4rda51ms19e8fl9lhj541dnlnlo7p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

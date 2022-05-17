@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group   android:checkableBehavior="single">
+
+    <item
+        android:id="@+id/Nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_baseline_home_24">
+
+    </item>
+
+    <item
+        android:id="@+id/Nav_profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_account_circle_24">
+
+    </item>
+    <item
+        android:id="@+id/Nav_likes"
+        android:title="Likes"
+        android:icon="@drawable/ic_baseline_favorite_24">
+
+    </item>
+    <item
+        android:id="@+id/Nav_waiting_list"
+        android:title="Waitting List"
+        android:icon="@drawable/ic_baseline_list_alt_24">
+
+    </item>
+    <item
+        android:id="@+id/Nav_fav"
+        android:title="Favorite"
+        android:icon="@drawable/ic_baseline_stars_24">
+
+    </item>
+</group>
+<!--    <group   android:checkableBehavior="single">-->
+<!--        <item-->
+<!--            android:id="@+id/Nav_mprofile"-->
+<!--            android:title="My Profile">-->
+<!--            <menu>-->
+<!--                <item-->
+<!--                    android:id="@+id/Login"-->
+<!--                    android:title="Login"-->
+<!--                    android:icon="@drawable/ic_baseline_stars_24">-->
+
+<!--                </item>-->
+
+
+
+
+
+<!--            </menu>-->
+
+
+
+<!--        </item>-->
+
+<!--    </group>-->
+</menu>
