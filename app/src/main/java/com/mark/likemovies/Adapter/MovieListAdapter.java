@@ -26,7 +26,6 @@ import java.util.List;
 
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.ViewHolder> {
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference mdatabase;
     private DatabaseReference fdatabase;
     private List<Item> mData;
@@ -72,6 +71,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
          mcon.startActivity(new Intent(mcon, MovieDetails.class));
          Intent detailsIntent = new Intent(mcon, MovieDetails.class);
          detailsIntent.putExtra("movieslist",mData.get(position));
+         detailsIntent.putExtra("movieid",mData.get(position).getId());
          mcon.startActivity(detailsIntent);
      }
  });

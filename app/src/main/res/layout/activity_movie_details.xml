@@ -14,21 +14,26 @@
 
     <TextView
         android:id="@+id/tvMovieName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="viewEnd"
+        android:fontFamily="@font/arabic"
         android:textColor="@color/black"
         android:layout_margin="10dp"
-android:textStyle="bold"
+        android:textStyle="bold"
+
         android:textSize="25dp"
-        android:text="Movie Name"/>
+        android:text="Sonic"/>
 </LinearLayout>
     <TextView
         android:id="@+id/tvMovieYear"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:fontFamily="@font/arabic"
+        android:textAlignment="viewEnd"
         android:textStyle="bold"
-        android:layout_marginLeft="15dp"
+     android:layout_margin="10dp"
         android:textColor="@color/green"
         android:text="2022"/>
     <LinearLayout
@@ -38,21 +43,17 @@ android:textStyle="bold"
         >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/movieGenre"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
+            android:textColor="@color/purple_500"
             android:layout_margin="10dp"
-            android:textStyle="bold"
-            android:textColor="@color/grey"
-            android:text="Movie Type :"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_margin="10dp"
+            android:textAlignment="viewEnd"
+    android:fontFamily="@font/arabic"
 
-            android:textSize="25dp"
-            android:text="Movie Name"/>
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="دراما,كوميديا"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,84 +61,97 @@ android:textStyle="bold"
         android:orientation="horizontal"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:layout_margin="10dp"
-            android:textStyle="bold"
-            android:textColor="@color/grey"
-            android:text="Movie Crew :"/>
         <TextView
             android:id="@+id/tvMovieCrew"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/purple_500"
+            android:fontFamily="@font/arabic"
             android:layout_margin="10dp"
-
-            android:textSize="25dp"
-            android:text="Movie Name"/>
+            android:textAlignment="viewEnd"
+            android:textSize="20dp"
+            android:text="أطفال"/>
     </LinearLayout>
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        />
+<!--    <com.iarcuschin.simpleratingbar.SimpleRatingBar-->
+<!--        android:id="@+id/simpleRatingBar"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:srb_starSize="35dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        app:srb_numberOfStars="10"-->
+<!--        app:srb_rating="9"-->
+<!--        app:srb_stepSize="0.1"-->
+
+<!--        />-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="25dp"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:text="Story"/>-->
-        <TextView
 
+        <TextView
             android:id="@+id/movieRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/purple_700"
             android:layout_margin="10dp"
             android:gravity="center_horizontal"
-        android:drawableLeft="@drawable/ic_baseline_star_rate_24"
+            android:fontFamily="@font/arabic"
             android:textStyle="bold"
             android:textSize="20dp"
 
             android:text="Movie Name"/>
-        <TextView
-            android:drawableLeft="@drawable/ic_baseline_group_24"
-            android:id="@+id/tvmovieRatePepole"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/purple_700"
-            android:layout_margin="10dp"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:layout_margin="10dp"
+                    android:textStyle="bold"
 
-            android:gravity="right"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Movie Name"/>
+                    android:fontFamily="@font/arabic"
+                    android:textColor="@color/black"
+                    android:text="القصة"/>
+
+        <!--        <TextView-->
+<!--            android:drawableLeft="@drawable/ic_baseline_group_24"-->
+<!--            android:id="@+id/tvmovieRatePepole"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="@color/purple_700"-->
+<!--            android:layout_margin="10dp"-->
+
+<!--            android:gravity="right"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="20dp"-->
+<!--            android:text="Movie Name"/>-->
 
 
     </LinearLayout>
 
-    <ImageView
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:scaleType="fitXY"-->
+<!--        android:src="@drawable/ic_baseline_horizontal_rule_24" />-->
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_baseline_horizontal_rule_24"
-        />
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
     <TextView
+        android:id="@+id/MovieStory"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="25dp"
         android:layout_margin="10dp"
         android:textStyle="bold"
+        android:textAlignment="viewEnd"
+        android:textDirection="rtl"
+        android:fontFamily="@font/arabic"
         android:textColor="@color/grey"
         android:text="Story"/>
 </LinearLayout>
