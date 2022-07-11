@@ -3,6 +3,8 @@ package com.mark.likemovies;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
@@ -10,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 import com.mark.likemovies.Adapter.MovieListAdapter;
@@ -52,7 +57,23 @@ snapHelper.attachToRecyclerView(recyclerView);
 
         toolbar.showOverflowMenu();
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openNavigation,R.string.closeNavigation);
+        ViewCompat.setLayoutDirection(toolbar, ViewCompat.LAYOUT_DIRECTION_RTL);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openNavigation,R.string.closeNavigation){
+            @Override
+            public boolean onOptionsItemSelected(MenuItem item) {
+                System.out.println("ok");
+                if(item != null && item.getItemId() == android.R.id.home){
+                    if (drawerLayout.isDrawerOpen((Gravity.LEFT))) {
+                        drawerLayout.closeDrawer(Gravity.LEFT);
+                    } else {
+                        drawerLayout.openDrawer(Gravity.LEFT);
+                    }
+                }
+                return false;
+            }
+        };
+
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 

@@ -4,49 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/drawerlayout"
+
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layoutDirection="rtl"
     android:fitsSystemWindows="true"
-
+    tools:openDrawer="end"
     tools:context=".MainActivity">
 
-<com.google.android.material.appbar.AppBarLayout
-    android:layout_width="wrap_content"
-    android:background="@color/white"
-    android:layout_height="wrap_content">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="wrap_content"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar2"
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/purple_700"
-        android:minHeight="?attr/actionBarSize"
-        />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dropshadow"
+            android:outlineSpotShadowColor="@color/black"
+            android:outlineAmbientShadowColor="@color/black"
+            android:minHeight="?attr/actionBarSize"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recyclerview"
+
+                android:isScrollContainer="false"
+                />
+        </LinearLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/main_nav_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="right"
 
-        android:visibility="gone"
+
         app:headerLayout="@layout/header"
         app:menu="@menu/mainmenu" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:orientation="vertical">
-   <androidx.recyclerview.widget.RecyclerView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/recyclerview"
-
-       android:isScrollContainer="false"
-       />
-    </LinearLayout>
-</com.google.android.material.appbar.AppBarLayout>
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

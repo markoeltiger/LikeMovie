@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ import com.mark.likemovies.Models.Item;
 import com.mark.likemovies.Models.Movie;
 import com.mark.likemovies.MovieDetails;
 import com.mark.likemovies.R;
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -57,12 +59,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
  holder.likImage.setOnClickListener(new View.OnClickListener() {
      @Override
      public void onClick(View v) {
+System.out.print("button is clicked");
 
 
 
 
 
-        manager.scrollToPosition(position+1);
      }
  });
  holder.moreDetails.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +80,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
 holder.likImage.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        System.out.println("likedMovie from view holder");
+
+        manager.scrollToPosition(position+1);
+        FancyToast.makeText(mcon,"The Movie Liked Successfuly",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+
+
+
     }
 });
 
@@ -114,9 +121,8 @@ Button moreDetails;
             unlikeImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                        getAdapterPosition();
-
+                    FancyToast.makeText(mcon,"The Movie DisLiked Successfuly",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
+                    manager.scrollToPosition(   getAdapterPosition()+1);
                     System.out.println("Movie Liked");
                 }
             });
