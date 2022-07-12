@@ -15,8 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.transition.Hold;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.mark.likemovies.MainActivity;
 import com.mark.likemovies.Models.Item;
 import com.mark.likemovies.Models.Movie;
 import com.mark.likemovies.MovieDetails;
@@ -28,8 +33,8 @@ import java.util.List;
 
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.ViewHolder> {
-    private DatabaseReference mdatabase;
-    private DatabaseReference fdatabase;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database.getReference("movies");
     private List<Item> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
@@ -77,10 +82,14 @@ System.out.print("button is clicked");
          mcon.startActivity(detailsIntent);
      }
  });
+ FirebaseApp.initializeApp(mcon);
 holder.likImage.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
+        FirebaseApp.initializeApp(mcon);
 
+
+        ref.child("liked").child(mData.get(position).getId()).setValue(mData.get(position));
         manager.scrollToPosition(position+1);
         FancyToast.makeText(mcon,"The Movie Liked Successfuly",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
 
@@ -99,7 +108,7 @@ holder.likImage.setOnClickListener(new View.OnClickListener() {
 
 
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public   class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 ImageView posterImage,likImage,unlikeImage;
 TextView rating;
 Button moreDetails;
@@ -121,9 +130,11 @@ Button moreDetails;
             unlikeImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ref.child("disliked").child(mData.get(getAdapterPosition()).getId()).setValue(mData.get(getAdapterPosition()));
+
                     FancyToast.makeText(mcon,"The Movie DisLiked Successfuly",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
                     manager.scrollToPosition(   getAdapterPosition()+1);
-                    System.out.println("Movie Liked");
+                    System.out.println("Movie Liked"+mData.get(getAdapterPosition()).getImage());
                 }
             });
         }

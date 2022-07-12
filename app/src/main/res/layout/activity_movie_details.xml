@@ -92,6 +92,7 @@
             android:layout_margin="10dp"
             android:fontFamily="@font/arabic"
             android:text="أطفال"
+            android:visibility="gone"
             android:textAlignment="viewEnd"
             android:textColor="@color/purple_500"
             android:textSize="20dp" />

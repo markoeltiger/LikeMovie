@@ -1,5 +1,6 @@
 package com.mark.likemovies;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,12 +12,16 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mark.likemovies.Adapter.MovieListAdapter;
 import com.mark.likemovies.Client.ApiClient;
 import com.mark.likemovies.Models.Item;
@@ -38,6 +43,7 @@ NavigationView navigationView;
       RecyclerView recyclerView;
       List<Item> movieList;
     Item item;
+
     Movie moviecall;
 MovieListAdapter recyclerAdapter;
     @Override
@@ -47,6 +53,7 @@ MovieListAdapter recyclerAdapter;
         drawerLayout=findViewById(R.id.drawerlayout);
         toolbar=(Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
+        FirebaseApp.initializeApp(MainActivity.this);
         recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
@@ -54,6 +61,19 @@ MovieListAdapter recyclerAdapter;
         recyclerView.setLayoutManager(layoutManager);
 snapHelper.attachToRecyclerView(recyclerView);
         navigationView=findViewById(R.id.main_nav_view);
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    int id = item.getItemId();
+
+                    if (id == R.id.Nav_likes) {
+                        Intent likesintent =new Intent(MainActivity.this,likedmovies.class);
+                        startActivity(likesintent);
+                    }
+              return false;   }
+            });
+        }
 
         toolbar.showOverflowMenu();
 
@@ -89,9 +109,10 @@ snapHelper.attachToRecyclerView(recyclerView);
             public void onResponse(Call<Movie> call, Response<Movie> response) {
                moviecall=response.body();
                 movieList= moviecall.getItems();
-
+                FirebaseApp.initializeApp(MainActivity.this);
                 recyclerAdapter= new MovieListAdapter(MainActivity.this,movieList,layoutManager);
                 recyclerView.setAdapter(recyclerAdapter);
+
                 System.out.println("weather s" +response.raw().toString());
 
                 System.out.println("weather 1" +movieList.size());
