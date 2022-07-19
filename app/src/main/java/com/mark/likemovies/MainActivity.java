@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.SnapHelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -46,6 +48,27 @@ NavigationView navigationView;
 
     Movie moviecall;
 MovieListAdapter recyclerAdapter;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.ideamenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.idea) {
+            //process your onClick here
+            return true;
+        }
+
+
+       return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +76,14 @@ MovieListAdapter recyclerAdapter;
         drawerLayout=findViewById(R.id.drawerlayout);
         toolbar=(Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
-        FirebaseApp.initializeApp(MainActivity.this);
+        FirebaseApp.initializeApp(
+                MainActivity.this);
         recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         SnapHelper snapHelper = new PagerSnapHelper();
         recyclerView.setLayoutManager(layoutManager);
+
 snapHelper.attachToRecyclerView(recyclerView);
         navigationView=findViewById(R.id.main_nav_view);
         if (navigationView != null) {

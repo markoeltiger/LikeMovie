@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    app:chainUseRtl="true"
+
     tools:context=".MovieDetails">
 
     <androidx.appcompat.widget.Toolbar
@@ -113,6 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="25dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +130,7 @@
             android:layout_marginRight="60dp"
             android:fontFamily="@font/arabic"
             android:gravity="left"
-
+android:visibility="gone"
             android:text="Movie Name"
             android:textColor="@color/purple_700"
             android:textSize="25sp"
@@ -140,8 +143,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/arabic"
 
-
-            android:gravity="center"
+            android:layout_marginHorizontal="20sp"
+            android:gravity="left"
 
             android:text="الأبطال"
             android:textColor="@color/black"
@@ -154,7 +157,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginLeft="50sp"
+            android:layout_marginHorizontal="20sp"
+
             android:fontFamily="@font/arabic"
             android:gravity="right"
             android:text="القصة"
