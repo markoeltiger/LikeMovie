@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".FilterActivity">
+
+    <TextView
+        android:id="@+id/texttype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="نوع الفيلم :"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:textColor="@color/black"
+        android:textSize="30sp"/>
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:id="@+id/spinnertype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E4E4E4"
+        android:gravity="center"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:hint="Comedy"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/dark"
+        android:textColorHint="@color/grey"
+        android:textSize="14.5sp"
+        app:spinner_arrow_gravity="end"
+        app:spinner_arrow_padding="8dp"
+        app:spinner_divider_color="@color/colorAccent"
+        app:spinner_divider_show="true"
+        app:spinner_divider_size="0.4dp"
+        app:spinner_item_array="@array/Genre"
+        app:spinner_item_height="46dp"
+        app:spinner_popup_animation="dropdown"
+        app:spinner_popup_background="#FFFFFF"
+        app:spinner_popup_elevation="14dp" />
+    <TextView
+        android:id="@+id/textcountry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="بلد الإنتاج :"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:textColor="@color/black"
+        android:textSize="30sp"/>
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E4E4E4"
+        android:gravity="center"
+        android:hint="Egypt"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/dark"
+        android:textColorHint="@color/grey"
+        android:textSize="14.5sp"
+        app:spinner_arrow_gravity="end"
+        app:spinner_arrow_padding="8dp"
+        app:spinner_divider_color="@color/colorAccent"
+        app:spinner_divider_show="true"
+        app:spinner_divider_size="0.4dp"
+        app:spinner_item_array="@array/Genre"
+        app:spinner_item_height="46dp"
+        app:spinner_popup_animation="dropdown"
+        app:spinner_popup_background="#FFFFFF"
+        app:spinner_popup_elevation="14dp" />
+    <TextView
+        android:id="@+id/textyear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="سنة الإنتاج :"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:textColor="@color/black"
+        android:textSize="30sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:hint="2022"
+            android:inputType="number"
+            android:background="@drawable/textvioew"
+            android:layout_height="50sp"/>
+        <EditText
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:hint="2020"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:background="@drawable/textvioew"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/textrate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="تقييم الفيلم :"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        android:textColor="@color/black"
+        android:textSize="30sp"/>
+    <com.iarcuschin.simpleratingbar.SimpleRatingBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srb_starSize="40dp"
+        android:layout_gravity="right"
+        app:srb_numberOfStars="5"
+        android:visibility="gone"
+
+        app:srb_rating="0"
+        app:srb_stepSize="0.5"
+
+        app:srb_fillColor="@color/colorAccent"
+        />
+    <TextView
+        android:id="@+id/textplatform"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="تقييم الفيلم :"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+
+        android:textColor="@color/black"
+        android:textSize="30sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+
+        android:orientation="horizontal">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:text="ديسني بلص"
+            android:inputType="number"
+android:outlineAmbientShadowColor="@color/colorAccent"
+            android:layout_height="50sp"/>
+        <CheckBox
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:text="برايم"
+
+            android:textAlignment="center"
+            android:outlineAmbientShadowColor="@color/colorAccent"
+
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:text="نتفلكس"
+            android:outlineAmbientShadowColor="@color/colorAccent"
+
+
+            android:layout_height="50sp"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/applybutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/button1_sg"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="تنفيذ"/>
+</LinearLayout>

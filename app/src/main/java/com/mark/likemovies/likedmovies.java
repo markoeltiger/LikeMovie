@@ -16,6 +16,8 @@ import android.view.MenuItem;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mark.likemovies.Adapter.movielikeadapter;
@@ -24,6 +26,7 @@ import com.mark.likemovies.Models.Item;
 public class likedmovies extends AppCompatActivity {
     private RecyclerView recyclerView;
     Toolbar toolbar;
+    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
     movielikeadapter
             adapter; // Create Object of the Adapter class
@@ -57,7 +60,7 @@ public class likedmovies extends AppCompatActivity {
         toolbar=(Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         mbase
-                = FirebaseDatabase.getInstance().getReference().child("movies").child("liked");
+                = FirebaseDatabase.getInstance().getReference().child("users").child(currentFirebaseUser.getUid()).child("liked");
 
         recyclerView = findViewById(R.id.recycler1);
 

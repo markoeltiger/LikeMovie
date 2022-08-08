@@ -1,7 +1,9 @@
 package com.mark.likemovies
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -23,9 +25,11 @@ class LoginActivity : AppCompatActivity() {
     private var inputEmail: EditText? = null
     private var inputPassword: EditText? = null
     private var btnSignIn: Button? = null
+    private val sharedPrefFile = "sharedpreference"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login2)
+
         auth = FirebaseAuth.getInstance()
         inputEmail = findViewById(R.id.et_username) as EditText
         inputPassword = findViewById(R.id.et_password) as EditText
@@ -73,8 +77,13 @@ btnSignIn!!.setOnClickListener {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
+                    val sharedPreferences: SharedPreferences = this.getSharedPreferences(sharedPrefFile,
+                        Context.MODE_PRIVATE)
+                    val editor:SharedPreferences.Editor =  sharedPreferences.edit()
+                    editor.putBoolean("logged",true)
 
+                    editor.apply()
+                    editor.commit()
 
                     startActivity(Intent(this, MainActivity::class.java))
 

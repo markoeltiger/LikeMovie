@@ -51,6 +51,6 @@
 
 
         app:headerLayout="@layout/header"
-        app:menu="@menu/mainmenu" />
+ />
 
 </androidx.drawerlayout.widget.DrawerLayout>

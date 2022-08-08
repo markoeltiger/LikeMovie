@@ -33,6 +33,12 @@
         android:icon="@drawable/ic_baseline_stars_24">
 
     </item>
+    <item
+        android:id="@+id/Nav_Premuim"
+        android:title="Premuim"
+        android:icon="@drawable/ic_baseline_local_atm_24">
+
+    </item>
 </group>
 <!--    <group   android:checkableBehavior="single">-->
 <!--        <item-->

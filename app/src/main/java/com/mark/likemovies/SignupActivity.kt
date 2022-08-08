@@ -1,6 +1,8 @@
 package com.mark.likemovies
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +27,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private var username: EditText? = null
     private var phone: EditText? = null
+    private val sharedPrefFile = "sharedpreference"
 
     private var inputEmail: EditText? = null
     private var inputPassword: EditText? = null
@@ -113,6 +116,14 @@ class SignupActivity : AppCompatActivity() {
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
                     updateUI(user)
+                    val sharedPreferences: SharedPreferences = this.getSharedPreferences(sharedPrefFile,
+                        Context.MODE_PRIVATE)
+                    val editor: SharedPreferences.Editor =  sharedPreferences.edit()
+                    editor.putBoolean("logged",true)
+
+                    editor.apply()
+                    editor.commit()
+
                     startActivity(Intent(this, MainActivity::class.java))
 
                 } else {

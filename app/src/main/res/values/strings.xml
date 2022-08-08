@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Like Movies</string>
+    <string name="app_name">kkkkkz</string>
     <string name="openNavigation">open navigation drawer</string>
     <string name="closeNavigation">>close navigation drawer</string>
     <string name="apikey">k_wfn8g9ur</string>
@@ -29,4 +29,25 @@
     <string name="hint_email">Email</string>
     <string name="hint_phone">Phone</string>
     <string name="hint_confirm_password">Confirm Password</string>
+    <string-array name="Genre">
+        <item>Animation</item>
+        <item>Short</item>
+        <item>Comedy</item>
+        <item>Western</item>     <item>Adventure</item>
+        <item>Music</item>
+        <item>Action</item>
+        <item>Romance</item>
+        <item>Drama</item>
+        <item>War</item>     <item>Musical</item>
+        <item>Mystery</item>
+        <item>Crime</item>
+        <item>Horror</item>
+        <item>Fantasy</item>
+        <item>Sci-Fi</item>
+        <item>Sport</item>
+        <item>Documentary</item>
+        <item>History</item>
+
+
+    </string-array>
 </resources>
