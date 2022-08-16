@@ -3,6 +3,7 @@ package com.mark.likemovies.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import com.mark.likemovies.LoginActivity;
 import com.mark.likemovies.Models.Item;
 import com.mark.likemovies.Models.preidecteitem;
 import com.mark.likemovies.MovieDetails;
@@ -38,6 +40,7 @@ public class MoviepredictedListAdapter extends RecyclerView.Adapter<Moviepredict
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private Context mcon;
+    SharedPreferences sharedpreferences;
 
     LinearLayoutManager manager;
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
@@ -54,6 +57,8 @@ public class MoviepredictedListAdapter extends RecyclerView.Adapter<Moviepredict
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.movieitem, parent, false);
+        sharedpreferences =mcon.getSharedPreferences("sharedpreference", Context.MODE_PRIVATE);
+
         return new ViewHolder(view);
     }
 
@@ -61,13 +66,20 @@ public class MoviepredictedListAdapter extends RecyclerView.Adapter<Moviepredict
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Picasso.get().load(mData.get(position).getImage()).into(holder.posterImage);
- holder.rating.setText(mData.get(position).getImDbRating() +" / 10");
+// holder.rating.setText(mData.get(position).getImDbRating() +" / 10");
  holder.likImage.setOnClickListener(new View.OnClickListener() {
      @Override
      public void onClick(View v) {
 System.out.print("button is clicked");
 
+         if (isloggedin()){     ref.child("users").child(currentFirebaseUser.getUid()).child("liked").child(mData.get(position).getId()).setValue(mData.get(position));
+             manager.scrollToPosition(position+1);
+             FancyToast.makeText(mcon,"The Movie Liked Successfuly",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+         }else {    FancyToast.makeText(mcon,"You Must Login To Make an action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
+             Intent gotologin = new Intent(mcon, LoginActivity.class);
+             mcon.startActivity(gotologin);
 
+         }
 
 
 
@@ -91,15 +103,10 @@ System.out.print("button is clicked");
      }
  });
  FirebaseApp.initializeApp(mcon);
-holder.likImage.setOnClickListener(new View.OnClickListener() {
+holder.unlikeImage.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         FirebaseApp.initializeApp(mcon);
-
-
-        ref.child("users").child(currentFirebaseUser.getUid()).child("liked").child(mData.get(position).getId()).setValue(mData.get(position));
-        manager.scrollToPosition(position+1);
-        FancyToast.makeText(mcon,"The Movie Liked Successfuly",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
 
 
 
@@ -117,15 +124,15 @@ holder.likImage.setOnClickListener(new View.OnClickListener() {
 
     // stores and recycles views as they are scrolled off screen
     public   class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-ImageView posterImage,likImage,unlikeImage;
+ImageView posterImage;
 TextView rating;
-Button moreDetails;
+Button moreDetails,likImage,unlikeImage;
         ViewHolder(View itemView) {
             super(itemView);
             posterImage=itemView.findViewById(R.id.mymoviposter);
             likImage=itemView.findViewById(R.id.likeMovieImage);
             unlikeImage=itemView.findViewById(R.id.unikeMovieImage);
-            rating=itemView.findViewById(R.id.rating);
+//            rating=itemView.findViewById(R.id.rating);
             moreDetails=itemView.findViewById(R.id.moreDetails);
             // myTextView = itemView.findViewById(R.id.tvAnimalName);
             //itemView.setOnClickListener(this);
@@ -138,12 +145,15 @@ Button moreDetails;
             unlikeImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ref.child("users").child(currentFirebaseUser.getUid()).child("disliked").child(mData.get(getAdapterPosition()).getId()).setValue(mData.get(getAdapterPosition()));
+                    if (isloggedin()){    ref.child("users").child(currentFirebaseUser.getUid()).child("disliked").child(mData.get(getAdapterPosition()).getId()).setValue(mData.get(getAdapterPosition()));
 
-                    FancyToast.makeText(mcon,"The Movie DisLiked Successfuly",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
-                    manager.scrollToPosition(   getAdapterPosition()+1);
-                    System.out.println("Movie Liked"+mData.get(getAdapterPosition()).getImage());
-                }
+                        FancyToast.makeText(mcon,"The Movie DisLiked Successfuly",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
+                        manager.scrollToPosition(   getAdapterPosition()+1);
+                        System.out.println("Movie Liked"+mData.get(getAdapterPosition()).getImage());}
+                    else {FancyToast.makeText(mcon,"You Must Login To Make an Action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
+                        Intent gotologin = new Intent(mcon, LoginActivity.class);
+                        mcon.startActivity(gotologin);
+                }}
             });
         }
 
@@ -166,5 +176,10 @@ Button moreDetails;
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+    }
+    public boolean isloggedin(){
+        boolean logged = false;
+        logged  = sharedpreferences.getBoolean("logged",false);
+        return logged;
     }
 }

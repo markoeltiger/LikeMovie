@@ -15,8 +15,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#777777</color>
     <color name="dark">#030613</color>
-    <color name="green">#008F07</color>
+    <color name="green">#29893f</color>
 
+    <color name="yellow">#c79127</color>
 
         <!--colors for modern ui-->
         <color name="whiteTextColor">#fff</color>
@@ -314,6 +315,7 @@
         <color name="md_grey_700">#616161</color>
         <color name="md_grey_800">#424242</color>
         <color name="md_grey_900">#212121</color>
+    <color name="mygrey">#999999</color>
         <color name="md_black_1000">#000000</color>
         <color name="md_white_1000">#ffffff</color>
 

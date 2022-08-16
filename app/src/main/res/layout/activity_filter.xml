@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".FilterActivity">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dropshadow"
+        android:outlineSpotShadowColor="@color/black"
+        android:outlineAmbientShadowColor="@color/black"
+        android:minHeight="?attr/actionBarSize"
+        />
     <TextView
         android:id="@+id/texttype"
         android:layout_width="match_parent"
@@ -53,7 +64,7 @@
         android:layout_height="wrap_content"
         android:background="#E4E4E4"
         android:gravity="center"
-        android:hint="Egypt"
+        android:hint="USA"
         android:padding="10dp"
         android:layout_margin="10dp"
         android:textColor="@color/dark"
@@ -64,7 +75,7 @@
         app:spinner_divider_color="@color/colorAccent"
         app:spinner_divider_show="true"
         app:spinner_divider_size="0.4dp"
-        app:spinner_item_array="@array/Genre"
+        app:spinner_item_array="@array/Counties"
         app:spinner_item_height="46dp"
         app:spinner_popup_animation="dropdown"
         app:spinner_popup_background="#FFFFFF"
@@ -175,10 +186,11 @@ android:outlineAmbientShadowColor="@color/colorAccent"
         android:id="@+id/applybutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="15dp"
         android:background="@drawable/button1_sg"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="20dp"
         android:text="تنفيذ"/>
+
 </LinearLayout>

@@ -71,7 +71,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Picasso.get().load(mData.get(position).getImage()).into(holder.posterImage);
- holder.rating.setText(mData.get(position).getImDbRating() +" / 10");
+// holder.rating.setText(mData.get(position).getImDbRating() +" / 10");
  holder.likImage.setOnClickListener(new View.OnClickListener() {
      @Override
      public void onClick(View v) {
@@ -83,15 +83,15 @@ System.out.print("button is clicked");
 
      }
  });
- holder.filter.setOnClickListener(new View.OnClickListener() {
-     @Override
-     public void onClick(View v) {
-
-         Intent detailsIntent = new Intent(mcon, FilterActivity.class);
-
-         mcon.startActivity(detailsIntent);
-     }
- });
+// holder.filter.setOnClickListener(new View.OnClickListener() {
+//     @Override
+//     public void onClick(View v) {
+//
+//         Intent detailsIntent = new Intent(mcon, FilterActivity.class);
+//
+//         mcon.startActivity(detailsIntent);
+//     }
+// });
  holder.moreDetails.setOnClickListener(new View.OnClickListener() {
      @Override
      public void onClick(View v) {
@@ -133,18 +133,18 @@ mcon.startActivity(gotologin);
 
     // stores and recycles views as they are scrolled off screen
     public   class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-ImageView posterImage,likImage,unlikeImage;
+ImageView posterImage;
 TextView rating;
-Button moreDetails;
+Button moreDetails,likImage,unlikeImage;
         Button filter;
         ViewHolder(View itemView) {
             super(itemView);
             posterImage=itemView.findViewById(R.id.mymoviposter);
             likImage=itemView.findViewById(R.id.likeMovieImage);
             unlikeImage=itemView.findViewById(R.id.unikeMovieImage);
-            rating=itemView.findViewById(R.id.rating);
+//            rating=itemView.findViewById(R.id.rating);
             moreDetails=itemView.findViewById(R.id.moreDetails);
-            filter=itemView.findViewById(R.id.filter);
+//            filter=itemView.findViewById(R.id.filter);
             // myTextView = itemView.findViewById(R.id.tvAnimalName);
             //itemView.setOnClickListener(this);
             likImage.setOnClickListener(new View.OnClickListener() {

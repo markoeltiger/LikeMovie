@@ -39,7 +39,7 @@ public class movielikeadapter extends FirebaseRecyclerAdapter<Item, movielikeada
 
     @Override
     protected void onBindViewHolder(@NonNull itemViewholder holder, int position, @NonNull Item model) {
-        Picasso.get().load(model.getImage()).into(holder.imageView);
+        Picasso.get().load(model.getImage()).placeholder(R.drawable.movieposter).into(holder.imageView);
 //        holder.moviename.setText(model.getTitle());
 //holder.movierate.setText(model.getImDbRating());
 holder.itemView.setOnClickListener(new View.OnClickListener() {

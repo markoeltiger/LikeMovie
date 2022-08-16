@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">kkkkkz</string>
+    <string name="app_name">Good and Bad</string>
     <string name="openNavigation">open navigation drawer</string>
     <string name="closeNavigation">>close navigation drawer</string>
     <string name="apikey">k_wfn8g9ur</string>
@@ -47,6 +47,11 @@
         <item>Sport</item>
         <item>Documentary</item>
         <item>History</item>
+
+
+    </string-array>
+    <string-array name="Counties">
+        <item>USA</item>
 
 
     </string-array>

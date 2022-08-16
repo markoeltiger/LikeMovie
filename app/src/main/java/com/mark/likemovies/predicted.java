@@ -30,6 +30,7 @@ import com.mark.likemovies.Models.Movie;
 import com.mark.likemovies.Models.predictedmovie;
 import com.mark.likemovies.Models.preidecteitem;
 import com.mark.likemovies.R;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -65,8 +66,15 @@ public class predicted extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.idea) {
-            //process your onClick here
-            return true;
+            if (isloggedin()){        Intent idea = new Intent(predicted.this,FilterActivity.class);
+                startActivity(idea);
+                return true;}else{
+
+                FancyToast.makeText(predicted.this,"You Must Login To Make an action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
+                Intent gotologin = new Intent(predicted.this, LoginActivity.class);
+                startActivity(gotologin);
+            }
+
         }
 
 

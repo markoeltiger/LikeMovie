@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/filter"
-        android:icon="@drawable/ic_baseline_filter_alt_24"
+        android:icon="@drawable/outlineheart"
+        android:iconTint="@color/purple_700"
         android:orderInCategory="300"
+android:iconTintMode="add"
         android:title="filter"
         app:showAsAction="ifRoom"></item>
     <item
         android:id="@+id/idea"
-        android:icon="@drawable/ic_baseline_wb_incandescent_24"
+        android:icon="@drawable/lamp"
         android:orderInCategory="300"
         android:title="User"
         app:showAsAction="ifRoom"></item>

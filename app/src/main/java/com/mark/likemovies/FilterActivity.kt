@@ -1,11 +1,12 @@
 package com.mark.likemovies
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.mark.likemovies.Client.SearchApi
 import com.mark.likemovies.Helper.RetrofitApiHelper
 import com.shashank.sony.fancytoastlib.FancyToast
@@ -16,6 +17,9 @@ class FilterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter)
+        var toolbar: Toolbar? = null
+        toolbar = findViewById<View>(R.id.toolbar2) as Toolbar
+        setSupportActionBar(toolbar)
         val applybutton = findViewById<Button>(R.id.applybutton)
         applybutton.setOnClickListener {
             intent = Intent(applicationContext, predicted::class.java)
