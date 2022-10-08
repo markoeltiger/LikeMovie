@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,9 +36,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mark.likemovies.Adapter.MovieListAdapter;
 import com.mark.likemovies.Client.ApiClient;
+import com.mark.likemovies.Models.API.Page;
+import com.mark.likemovies.Models.APImodel;
+import com.mark.likemovies.Models.Data;
 import com.mark.likemovies.Models.Item;
 import com.mark.likemovies.Models.Movie;
-import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 import java.util.List;
@@ -55,12 +56,13 @@ Toolbar toolbar;
 DrawerLayout drawerLayout;
 NavigationView navigationView;
       RecyclerView recyclerView;
-      List<Item> movieList;
+      List<Data> movieList;
     SharedPreferences sharedpreferences;
-    Item item;
+
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
     DatabaseReference mbase;
-    Movie moviecall;
+    APImodel apImodel;
+    com.mark.likemovies.Models.API.Response moviecall;
 MovieListAdapter recyclerAdapter;
 
 
@@ -112,33 +114,54 @@ if (isloggedin()){     mbase
 
 snapHelper.attachToRecyclerView(recyclerView);
         navigationView=findViewById(R.id.main_nav_view);
-        if (!isloggedin()){    navigationView.inflateMenu(R.menu.notloggedin);}else {navigationView.inflateMenu(R.menu.mainmenu);}
-
-        if (navigationView != null) {
+        if (!isloggedin()){    navigationView.inflateMenu(R.menu.notloggedin);
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     int id = item.getItemId();
 
-                    if (id == R.id.Nav_likes) {
-                        Intent likesintent =new Intent(MainActivity.this,likedmovies.class);
-                        startActivity(likesintent);
-                    }
-                    if (id == R.id.Nav_Login) {
+                    System.out.print(id);
+                    if (id == R.id.Nav_Logins) {
                         Intent loginintent =new Intent(MainActivity.this,LoginActivity.class);
                         startActivity(loginintent);
                     }
-                    if (id == R.id.Nav_signup) {
+                    if (id == R.id.Nav_signups) {
                         Intent signupintent =new Intent(MainActivity.this,SignupActivity.class);
                         startActivity(signupintent);
                     }
+                    return false;
+                }
+            });
+
+
+
+
+        }else {navigationView.inflateMenu(R.menu.mainmenu);
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    int id = item.getItemId();
+                    System.out.print(id+"ass");
+
+                    if (id == R.id.Nav_likes) {
+                        Intent likesintent =new Intent(MainActivity.this,likedmovies.class);
+                        likesintent.putExtra("type","liked");
+                        startActivity(likesintent);
+                    }
+
                     if (id == R.id.Nav_Premuim) {
                         Intent Subscribeintent =new Intent(MainActivity.this,Subscribe.class);
                         startActivity(Subscribeintent);
                     }
-              return false;   }
-            });
-        }
+                    if (id == R.id.Nav_waiting_list) {
+                        Intent waitingintent =new Intent(MainActivity.this,likedmovies.class);
+                        waitingintent.putExtra("type","loved");
+
+                        startActivity(waitingintent);
+                    }
+                    return false;   }
+            });}
+
 
         toolbar.showOverflowMenu();
 
@@ -200,17 +223,18 @@ snapHelper.attachToRecyclerView(recyclerView);
         toggle.syncState();
 
         Retrofit retrofit= new Retrofit.Builder()
-                .baseUrl("https://imdb-api.com/en/API/")
+                .baseUrl(Constants.APIBASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiClient myapiclient =retrofit.create(ApiClient.class);
 
-        Call<Movie> mainCall =myapiclient.getTop250Movies();
-        mainCall.enqueue(new Callback<Movie>() {
+        Call<com.mark.likemovies.Models.APImodel> mainCall =myapiclient.getMoviesFromAPI();
+        mainCall.enqueue(new Callback<com.mark.likemovies.Models.APImodel>() {
             @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
-               moviecall=response.body();
-                movieList= moviecall.getItems();
+            public void onResponse(Call<com.mark.likemovies.Models.APImodel> call, Response<com.mark.likemovies.Models.APImodel> response) {
+                apImodel=response.body();
+                movieList= apImodel.getData();
+                System.out.println(response.body());
                 Collections.shuffle(movieList);
                 FirebaseApp.initializeApp(MainActivity.this);
                 recyclerAdapter= new MovieListAdapter(MainActivity.this,movieList,layoutManager);
@@ -226,10 +250,11 @@ snapHelper.attachToRecyclerView(recyclerView);
             }
 
             @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
-                System.out.println("weather 0" +t.toString());
+            public void onFailure(Call<com.mark.likemovies.Models.APImodel> call, Throwable t) {
 
             }
+
+
         });
 
 

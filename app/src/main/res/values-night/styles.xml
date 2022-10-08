@@ -7,7 +7,12 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="tabtext" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">25sp</item>
+        <item name="fontFamily">@font/clientfont</item>
 
+    </style>
 <!--    <style name="AppTheme.NoActionBar">-->
 <!--        <item name="windowActionBar">false</item>-->
 <!--        <item name="windowNoTitle">true</item>-->

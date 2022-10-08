@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+    android:id="@+id/love"
+        android:icon="@drawable/outlineheart"
+        android:iconTint="@color/purple_700"
+
+        android:orderInCategory="300"
+        android:iconTintMode="screen"
+        android:title="love"
+        app:showAsAction="ifRoom">
+
+    </item>
+    <item
+        android:id="@+id/share"
+        android:orderInCategory="300"
+        android:title="share"
+
+        android:icon="@drawable/ic_baseline_share_24"
+        app:showAsAction="ifRoom"></item>
+
+
+</menu>

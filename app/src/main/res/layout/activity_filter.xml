@@ -93,24 +93,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:textAlignment="center"
+        <com.skydoves.powerspinner.PowerSpinnerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E4E4E4"
+            android:gravity="center"
             android:hint="2022"
-            android:inputType="number"
-            android:background="@drawable/textvioew"
-            android:layout_height="50sp"/>
-        <EditText
-            android:layout_weight="1"
+            android:padding="10dp"
             android:layout_margin="10dp"
-            android:hint="2020"
-            android:inputType="number"
-            android:textAlignment="center"
-            android:background="@drawable/textvioew"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"/>
+            android:textColor="@color/dark"
+            android:textColorHint="@color/grey"
+            android:textSize="14.5sp"
+            app:spinner_arrow_gravity="end"
+            app:spinner_arrow_padding="8dp"
+            app:spinner_divider_color="@color/colorAccent"
+            app:spinner_divider_show="true"
+            app:spinner_divider_size="0.4dp"
+            app:spinner_item_array="@array/Years"
+            app:spinner_item_height="46dp"
+            app:spinner_popup_animation="dropdown"
+            app:spinner_popup_background="#FFFFFF"
+            app:spinner_popup_elevation="14dp" />
+<!--        <EditText-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:textAlignment="center"-->
+<!--            android:hint="2022"-->
+<!--            android:inputType="number"-->
+<!--            android:background="@drawable/textvioew"-->
+<!--            android:layout_height="50sp"/>-->
+<!--        <EditText-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:hint="2020"-->
+<!--            android:inputType="number"-->
+<!--            android:textAlignment="center"-->
+<!--            android:background="@drawable/textvioew"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="50dp"/>-->
     </LinearLayout>
     <TextView
         android:id="@+id/textrate"

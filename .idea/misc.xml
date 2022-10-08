@@ -9,6 +9,7 @@
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable-v24/button1_sg.xml" value="0.1155" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable-v24/colored_like.xml" value="0.138" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable-v24/colored_unlike.xml" value="0.1" />
+        <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable-v24/goodbutton.xml" value="0.1155" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable-v24/ic_back.xml" value="0.1155" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1155" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable-v24/ic_plus.xml" value="0.1155" />
@@ -17,6 +18,7 @@
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/button.xml" value="0.1395" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/crown.xml" value="0.1045" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/dropshadow.xml" value="0.1145" />
+        <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/gradient_bg.xml" value="0.1155" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.139" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.1215" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/ic_baseline_done_outline_24.xml" value="0.1035" />
@@ -27,6 +29,8 @@
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/ic_baseline_star_rate_24.xml" value="0.1215" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/ic_login_bk.xml" value="0.1395" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/login_shape_bk.xml" value="0.1395" />
+        <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/tab_bg.xml" value="0.1155" />
+        <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/tabcustomselector.xml" value="0.1" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/drawable/textvioew.xml" value="0.1155" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/font/arabic.xml" value="0.22314814814814815" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/font/fontroboto.xml" value="0.23333333333333334" />
@@ -42,9 +46,13 @@
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/layout/activity_signup.xml" value="0.22" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/layout/activity_subscribe.xml" value="0.1" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/layout/advantage_item.xml" value="0.1" />
+        <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/layout/fragmentheros.xml" value="0.153125" />
+        <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/layout/fragmentstory.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/layout/header.xml" value="0.17255434782608695" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/layout/likedmovieitem.xml" value="0.25" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/layout/movieitem.xml" value="0.25" />
+        <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/menu/details toolbar.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/menu/detailstoolbar.xml" value="0.2" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/menu/ideamenu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/menu/mainmenu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/EGYPT_LAPTOP/AndroidStudioProjects/LikeMovies/app/src/main/res/menu/notloggedin.xml" value="0.1" />

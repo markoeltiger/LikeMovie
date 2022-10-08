@@ -1,17 +1,43 @@
 package com.mark.likemovies.Models;
 
-public class preidecteitem {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-        public String id;
+@Entity(tableName = "preidecteitem")
+public class preidecteitem {
+    @PrimaryKey
+    public String id;
+
+    @ColumnInfo(name = "rank")
         public String rank;
-        public String rankUpDown;
-        public String title;
-        public String fullTitle;
-        public String year;
-        public String image;
-        public String crew;
-        public String imDbRating;
-        public String imDbRatingCount;
+    @ColumnInfo(name = "rankUpDown")
+
+    public String rankUpDown;
+    @ColumnInfo(name = "title")
+
+    public String title;
+    @ColumnInfo(name = "fullTitle")
+
+    public String fullTitle;
+    @ColumnInfo(name = "year")
+
+    public String year;
+    @ColumnInfo(name = "image")
+
+    public String image;
+    @ColumnInfo(name = "crew")
+
+    public String crew;
+    @ColumnInfo(name = "imDbRating")
+
+    public String imDbRating;
+    @ColumnInfo(name = "imDbRatingCount")
+
+    public String imDbRatingCount;
+    @ColumnInfo(name = "liked")
+
+    public boolean liked =false;
 
     public String getId() {
         return id;

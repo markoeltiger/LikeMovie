@@ -85,7 +85,7 @@ btnSignIn!!.setOnClickListener {
                     editor.apply()
                     editor.commit()
 
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, likedmovies::class.java))
 
                 } else {
                     // If sign in fails, display a message to the user.

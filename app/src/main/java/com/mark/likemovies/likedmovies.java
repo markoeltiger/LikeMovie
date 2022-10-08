@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +28,7 @@ public class likedmovies extends AppCompatActivity {
     private RecyclerView recyclerView;
     Toolbar toolbar;
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-
+String type ="liked";
     movielikeadapter
             adapter; // Create Object of the Adapter class
     DatabaseReference mbase;
@@ -59,8 +60,23 @@ public class likedmovies extends AppCompatActivity {
         drawerLayout=findViewById(R.id.drawerlayout);
         toolbar=(Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
-        mbase
-                = FirebaseDatabase.getInstance().getReference().child("users").child(currentFirebaseUser.getUid()).child("liked");
+
+        Intent i = getIntent();
+
+        type=i.getStringExtra("type");
+        System.out.println("type " + type);
+        if (type.equals("loved")){
+            System.out.println("type " + type);
+
+            mbase
+                    = FirebaseDatabase.getInstance().getReference().child("users").child(currentFirebaseUser.getUid()).child("loved");
+
+
+        }else if (type.equals("liked")){  mbase
+                = FirebaseDatabase.getInstance().getReference().child("users").child(currentFirebaseUser.getUid()).child("loved");
+        }
+
+
 
         recyclerView = findViewById(R.id.recycler1);
 

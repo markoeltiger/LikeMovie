@@ -1,14 +1,23 @@
 package com.mark.likemovies.Models;
 
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 
 public class FullMovie {
+
     private String id;
+
     private String title;
+
     private String originalTitle;
+
     private String fullTitle;
+
     private String type;
+
     private String year;
     private String image;
     private String releaseDate;

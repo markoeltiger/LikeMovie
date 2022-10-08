@@ -65,7 +65,7 @@ public class MoviepredictedListAdapter extends RecyclerView.Adapter<Moviepredict
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Picasso.get().load(mData.get(position).getImage()).into(holder.posterImage);
+        Picasso.get().load(mData.get(position).getImage()).placeholder(R.drawable.movieposter).into(holder.posterImage);
 // holder.rating.setText(mData.get(position).getImDbRating() +" / 10");
  holder.likImage.setOnClickListener(new View.OnClickListener() {
      @Override
@@ -99,20 +99,28 @@ System.out.print("button is clicked");
          item.setYear(mData.get(position).getYear());
          detailsIntent.putExtra("movieslist", item);
          detailsIntent.putExtra("movieid",mData.get(position).getId());
+         detailsIntent.putExtra("position",position);
+
          mcon.startActivity(detailsIntent);
      }
  });
  FirebaseApp.initializeApp(mcon);
-holder.unlikeImage.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        FirebaseApp.initializeApp(mcon);
+
+        holder.unlikeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isloggedin()){     ref.child("users").child(currentFirebaseUser.getUid()).child("disliked").child(mData.get(position).getId()).setValue(mData.get(position));
+                    manager.scrollToPosition(position+1);
+                    FancyToast.makeText(mcon,"The Movie Disliked Successfuly",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+                }else {    FancyToast.makeText(mcon,"You Must Login To Make an action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
+                    Intent gotologin = new Intent(mcon, LoginActivity.class);
+                    mcon.startActivity(gotologin);
+
+                }
 
 
-
-    }
-});
-
+            }
+        });
     }
 
     // total number of rows

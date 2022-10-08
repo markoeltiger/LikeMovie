@@ -22,7 +22,7 @@ class FilterActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val applybutton = findViewById<Button>(R.id.applybutton)
         applybutton.setOnClickListener {
-            intent = Intent(applicationContext, predicted::class.java)
+            intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
             FancyToast.makeText(this, "تم تطبيق التخصيصات", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
         }

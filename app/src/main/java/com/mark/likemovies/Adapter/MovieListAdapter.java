@@ -8,28 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.transition.Hold;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.mark.likemovies.FilterActivity;
 import com.mark.likemovies.LoginActivity;
-import com.mark.likemovies.MainActivity;
-import com.mark.likemovies.Models.Item;
-import com.mark.likemovies.Models.Movie;
+import com.mark.likemovies.Models.Data;
 import com.mark.likemovies.MovieDetails;
 import com.mark.likemovies.R;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -41,7 +32,7 @@ import java.util.List;
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.ViewHolder> {
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference();
-    private List<Item> mData;
+    private List<com.mark.likemovies.Models.Data> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private Context mcon;
@@ -51,7 +42,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
     // data is passed into the constructor
- public    MovieListAdapter(Context context, List<Item> data, LinearLayoutManager manager) {
+ public    MovieListAdapter(Context context, List<com.mark.likemovies.Models.Data> data, LinearLayoutManager manager) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.mcon=context;
@@ -70,7 +61,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Picasso.get().load(mData.get(position).getImage()).into(holder.posterImage);
+
+        Picasso.get().load(String.valueOf(mData.get(position).getPosters().get(2))).placeholder(R.drawable.movieposter).into(holder.posterImage);
 // holder.rating.setText(mData.get(position).getImDbRating() +" / 10");
  holder.likImage.setOnClickListener(new View.OnClickListener() {
      @Override
@@ -95,11 +87,16 @@ System.out.print("button is clicked");
  holder.moreDetails.setOnClickListener(new View.OnClickListener() {
      @Override
      public void onClick(View v) {
-         mcon.startActivity(new Intent(mcon, MovieDetails.class));
+         if (isloggedin()){
+             mcon.startActivity(new Intent(mcon, MovieDetails.class));
          Intent detailsIntent = new Intent(mcon, MovieDetails.class);
-         detailsIntent.putExtra("movieslist",mData.get(position));
+         detailsIntent.putExtra("movieslist", String.valueOf(mData.get(position)));
          detailsIntent.putExtra("movieid",mData.get(position).getId());
-         mcon.startActivity(detailsIntent);
+         mcon.startActivity(detailsIntent);}else {    FancyToast.makeText(mcon,"You Must Login To Make an action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
+             Intent gotologin = new Intent(mcon, LoginActivity.class);
+             mcon.startActivity(gotologin);
+
+         }
      }
  });
  FirebaseApp.initializeApp(mcon);
@@ -108,7 +105,7 @@ holder.likImage.setOnClickListener(new View.OnClickListener() {
     public void onClick(View v) {
         FirebaseApp.initializeApp(mcon);
 
-if (isloggedin()){     ref.child("users").child(currentFirebaseUser.getUid()).child("liked").child(mData.get(position).getId()).setValue(mData.get(position));
+if (isloggedin()){     ref.child("users").child(currentFirebaseUser.getUid()).child("liked").child(mData.get(position).getId()+"").setValue(mData.get(position));
     manager.scrollToPosition(position+1);
     FancyToast.makeText(mcon,"The Movie Liked Successfuly",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
 }else {    FancyToast.makeText(mcon,"You Must Login To Make an action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
@@ -121,7 +118,21 @@ mcon.startActivity(gotologin);
 
     }
 });
+holder.unlikeImage.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if (isloggedin()){     ref.child("users").child(currentFirebaseUser.getUid()).child("disliked").child(mData.get(position).getId()+"").setValue(mData.get(position));
+            manager.scrollToPosition(position+1);
+            FancyToast.makeText(mcon,"The Movie Disliked Successfuly",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+        }else {    FancyToast.makeText(mcon,"You Must Login To Make an action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
+            Intent gotologin = new Intent(mcon, LoginActivity.class);
+            mcon.startActivity(gotologin);
 
+        }
+
+
+    }
+});
     }
 
     // total number of rows
@@ -156,11 +167,11 @@ Button moreDetails,likImage,unlikeImage;
             unlikeImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (isloggedin()){    ref.child("users").child(currentFirebaseUser.getUid()).child("disliked").child(mData.get(getAdapterPosition()).getId()).setValue(mData.get(getAdapterPosition()));
+                    if (isloggedin()){    ref.child("users").child(currentFirebaseUser.getUid()).child("disliked").child(mData.get(getAdapterPosition()).getId()+"").setValue(mData.get(getAdapterPosition()));
 
                         FancyToast.makeText(mcon,"The Movie DisLiked Successfuly",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
                         manager.scrollToPosition(   getAdapterPosition()+1);
-                        System.out.println("Movie Liked"+mData.get(getAdapterPosition()).getImage());}
+                        System.out.println("Movie Liked"+mData.get(getAdapterPosition()).getPosters().get(2));}
 else {FancyToast.makeText(mcon,"You Must Login To Make an Action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
                         Intent gotologin = new Intent(mcon, LoginActivity.class);
                         mcon.startActivity(gotologin);
@@ -176,7 +187,7 @@ else {FancyToast.makeText(mcon,"You Must Login To Make an Action",FancyToast.LEN
     }
 
     // convenience method for getting data at click position
-    Item getItem(int id) {
+    Data getItem(int id) {
         return mData.get(id);
     }
 

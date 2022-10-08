@@ -3,14 +3,14 @@
 <group   android:checkableBehavior="single">
 
     <item
-        android:id="@+id/Nav_Login"
+        android:id="@+id/Nav_Logins"
         android:title="LogIn"
         android:icon="@drawable/ic_baseline_login_24">
 
     </item>
 
     <item
-        android:id="@+id/Nav_signup"
+        android:id="@+id/Nav_signups"
         android:title="SignUp"
         android:icon="@drawable/ic_baseline_person_add_24">
 

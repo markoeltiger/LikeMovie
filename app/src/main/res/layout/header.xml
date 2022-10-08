@@ -29,16 +29,17 @@
             android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:fontFamily="@font/clientfont"
             android:textStyle="bold"
             android:text="Mark Saif" />
 
         <TextView
             android:id="@+id/userIPhone"
-            android:textStyle="bold"
+            android:fontFamily="@font/clientfont"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textColor="@color/black"
-            android:text="01206720945" />
+            android:text="0111111111" />
     </LinearLayout>
 </LinearLayout>

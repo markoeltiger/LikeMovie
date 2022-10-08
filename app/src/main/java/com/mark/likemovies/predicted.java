@@ -1,5 +1,7 @@
 package com.mark.likemovies;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +17,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mark.likemovies.Adapter.MovieListAdapter;
 import com.mark.likemovies.Adapter.MoviepredictedListAdapter;
 import com.mark.likemovies.Client.ApiClient;
@@ -50,7 +62,9 @@ public class predicted extends AppCompatActivity {
     List<preidecteitem> movieList;
     preidecteitem item;
     SharedPreferences sharedpreferences;
-
+    DatabaseReference mbase;
+    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+int position=0;
     predictedmovie moviecall;
     MoviepredictedListAdapter recyclerAdapter;
 
@@ -77,6 +91,23 @@ public class predicted extends AppCompatActivity {
 
         }
 
+        if (id == R.id.filter) {
+            if (isloggedin()){
+
+
+
+
+                FancyToast.makeText(predicted.this,"Added To Loved Movies",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+                item.setIcon(R.drawable.ic_baseline_favorite_24);
+
+                return true;}else{
+
+                FancyToast.makeText(predicted.this,"You Must Login To Make an action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
+                Intent gotologin = new Intent(predicted.this, LoginActivity.class);
+                startActivity(gotologin);
+            }
+
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -90,6 +121,10 @@ public class predicted extends AppCompatActivity {
         FirebaseApp.initializeApp(
                 predicted.this);
         sharedpreferences = getSharedPreferences("sharedpreference", Context.MODE_PRIVATE);
+        if (isloggedin()){     mbase
+                = FirebaseDatabase.getInstance().getReference().child("users").child(currentFirebaseUser.getUid());
+        }else{   mbase
+                = FirebaseDatabase.getInstance().getReference().child("users").child("guest");}
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager
@@ -99,21 +134,94 @@ public class predicted extends AppCompatActivity {
 
         snapHelper.attachToRecyclerView(recyclerView);
         navigationView=findViewById(R.id.main_nav_view);
-        if (!isloggedin()){    navigationView.inflateMenu(R.menu.notloggedin);}else {navigationView.inflateMenu(R.menu.mainmenu);}
-
-        if (navigationView != null) {
+        if (!isloggedin()){    navigationView.inflateMenu(R.menu.notloggedin);
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     int id = item.getItemId();
 
+                    System.out.print(id);
+                    if (id == R.id.Nav_Logins) {
+                        Intent loginintent =new Intent(predicted.this,LoginActivity.class);
+                        startActivity(loginintent);
+                    }
+                    if (id == R.id.Nav_signups) {
+                        Intent signupintent =new Intent(predicted.this,SignupActivity.class);
+                        startActivity(signupintent);
+                    }
+                    return false;
+                }
+            });
+
+
+        }else {navigationView.inflateMenu(R.menu.mainmenu);
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    int id = item.getItemId();
+                    System.out.print(id+"ass");
+
                     if (id == R.id.Nav_likes) {
                         Intent likesintent =new Intent(predicted.this,likedmovies.class);
+                        likesintent.putExtra("type","liked");
+
                         startActivity(likesintent);
+                    }
+
+                    if (id == R.id.Nav_Premuim) {
+                        Intent Subscribeintent =new Intent(predicted.this,Subscribe.class);
+                        startActivity(Subscribeintent);
+                    }
+                    if (id == R.id.Nav_waiting_list) {
+                        Intent waitingintent =new Intent(predicted.this,likedmovies.class);
+                        waitingintent.putExtra("type","loved");
+
+                        startActivity(waitingintent);
                     }
                     return false;   }
             });
+
         }
+
+        View headerview =navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerview.findViewById(R.id.userName);
+        TextView number = (TextView) headerview.findViewById(R.id.userIPhone);
+        Intent i = getIntent();
+        supportInvalidateOptionsMenu();
+        position=i.getIntExtra("position",0);
+        mbase.child("email").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                number.setText(value);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        mbase.child("username").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                navUsername.setText(value);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
         toolbar.showOverflowMenu();
 
@@ -149,11 +257,12 @@ public class predicted extends AppCompatActivity {
             public void onResponse(Call<predictedmovie> call, Response<predictedmovie> response) {
                 moviecall=response.body();
                 movieList= moviecall.getItems();
-                Collections.shuffle(movieList);
+             //   Collections.shuffle(movieList);
                 FirebaseApp.initializeApp(predicted.this);
                 recyclerAdapter= new MoviepredictedListAdapter(predicted.this,movieList,layoutManager);
                 recyclerView.setAdapter(recyclerAdapter);
-
+                recyclerView.scrollToPosition(position);
+                
                 System.out.println("weather s" +response.raw().toString());
 
                 System.out.println("weather 1" +movieList.size());
@@ -169,9 +278,6 @@ public class predicted extends AppCompatActivity {
 
             }
         });
-
-
-
 
     }
     public boolean isloggedin(){
