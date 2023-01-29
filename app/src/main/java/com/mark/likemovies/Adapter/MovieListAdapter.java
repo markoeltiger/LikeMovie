@@ -39,21 +39,21 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     SharedPreferences sharedpreferences;
 
     LinearLayoutManager manager;
-    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     // data is passed into the constructor
- public    MovieListAdapter(Context context, List<com.mark.likemovies.Models.Data> data, LinearLayoutManager manager) {
+    public MovieListAdapter(Context context, List<com.mark.likemovies.Models.Data> data, LinearLayoutManager manager) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
-        this.mcon=context;
-        this.manager=manager;
+        this.mcon = context;
+        this.manager = manager;
     }
 
     // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.movieitem, parent, false);
-        sharedpreferences =mcon.getSharedPreferences("sharedpreference", Context.MODE_PRIVATE);
+        sharedpreferences = mcon.getSharedPreferences("sharedpreference", Context.MODE_PRIVATE);
 
         return new ViewHolder(view);
     }
@@ -62,19 +62,16 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        Picasso.get().load(String.valueOf(mData.get(position).getPosters().get(2))).placeholder(R.drawable.movieposter).into(holder.posterImage);
+        Picasso.get().load(String.valueOf(mData.get(position).getPosters().get(0).getImage())).placeholder(R.drawable.movieposter).into(holder.posterImage);
 // holder.rating.setText(mData.get(position).getImDbRating() +" / 10");
- holder.likImage.setOnClickListener(new View.OnClickListener() {
-     @Override
-     public void onClick(View v) {
-System.out.print("button is clicked");
+        holder.likImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.print("button is clicked");
 
 
-
-
-
-     }
- });
+            }
+        });
 // holder.filter.setOnClickListener(new View.OnClickListener() {
 //     @Override
 //     public void onClick(View v) {
@@ -84,55 +81,60 @@ System.out.print("button is clicked");
 //         mcon.startActivity(detailsIntent);
 //     }
 // });
- holder.moreDetails.setOnClickListener(new View.OnClickListener() {
-     @Override
-     public void onClick(View v) {
-         if (isloggedin()){
-             mcon.startActivity(new Intent(mcon, MovieDetails.class));
-         Intent detailsIntent = new Intent(mcon, MovieDetails.class);
-         detailsIntent.putExtra("movieslist", String.valueOf(mData.get(position)));
-         detailsIntent.putExtra("movieid",mData.get(position).getId());
-         mcon.startActivity(detailsIntent);}else {    FancyToast.makeText(mcon,"You Must Login To Make an action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
-             Intent gotologin = new Intent(mcon, LoginActivity.class);
-             mcon.startActivity(gotologin);
+        holder.moreDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isloggedin()) {
+                    mcon.startActivity(new Intent(mcon, MovieDetails.class));
+                    Intent detailsIntent = new Intent(mcon, MovieDetails.class);
+                    detailsIntent.putExtra("movieslist", String.valueOf(mData.get(position)));
+                    detailsIntent.putExtra("movieid", mData.get(position).getId());
+                    mcon.startActivity(detailsIntent);
+                } else {
+                    FancyToast.makeText(mcon, "You Must Login To Make an action", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                    Intent gotologin = new Intent(mcon, LoginActivity.class);
+                    mcon.startActivity(gotologin);
 
-         }
-     }
- });
- FirebaseApp.initializeApp(mcon);
-holder.likImage.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
+                }
+            }
+        });
         FirebaseApp.initializeApp(mcon);
+        holder.likImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseApp.initializeApp(mcon);
 
-if (isloggedin()){     ref.child("users").child(currentFirebaseUser.getUid()).child("liked").child(mData.get(position).getId()+"").setValue(mData.get(position));
-    manager.scrollToPosition(position+1);
-    FancyToast.makeText(mcon,"The Movie Liked Successfuly",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
-}else {    FancyToast.makeText(mcon,"You Must Login To Make an action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
-Intent gotologin = new Intent(mcon, LoginActivity.class);
-mcon.startActivity(gotologin);
+                if (isloggedin()) {
+                    ref.child("users").child(currentFirebaseUser.getUid()).child("liked").child(mData.get(position).getId() + "").setValue(mData.get(position));
+                    manager.scrollToPosition(position + 1);
+                    FancyToast.makeText(mcon, "The Movie Liked Successfuly", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                } else {
+                    FancyToast.makeText(mcon, "You Must Login To Make an action", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                    Intent gotologin = new Intent(mcon, LoginActivity.class);
+                    mcon.startActivity(gotologin);
 
-}
-
-
-
-    }
-});
-holder.unlikeImage.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if (isloggedin()){     ref.child("users").child(currentFirebaseUser.getUid()).child("disliked").child(mData.get(position).getId()+"").setValue(mData.get(position));
-            manager.scrollToPosition(position+1);
-            FancyToast.makeText(mcon,"The Movie Disliked Successfuly",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
-        }else {    FancyToast.makeText(mcon,"You Must Login To Make an action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
-            Intent gotologin = new Intent(mcon, LoginActivity.class);
-            mcon.startActivity(gotologin);
-
-        }
+                }
 
 
-    }
-});
+            }
+        });
+        holder.unlikeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isloggedin()) {
+                    ref.child("users").child(currentFirebaseUser.getUid()).child("disliked").child(mData.get(position).getId() + "").setValue(mData.get(position));
+                    manager.scrollToPosition(position + 1);
+                    FancyToast.makeText(mcon, "The Movie Disliked Successfuly", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                } else {
+                    FancyToast.makeText(mcon, "You Must Login To Make an action", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                    Intent gotologin = new Intent(mcon, LoginActivity.class);
+                    mcon.startActivity(gotologin);
+
+                }
+
+
+            }
+        });
     }
 
     // total number of rows
@@ -143,18 +145,19 @@ holder.unlikeImage.setOnClickListener(new View.OnClickListener() {
 
 
     // stores and recycles views as they are scrolled off screen
-    public   class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-ImageView posterImage;
-TextView rating;
-Button moreDetails,likImage,unlikeImage;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ImageView posterImage;
+        TextView rating;
+        Button moreDetails, likImage, unlikeImage;
         Button filter;
+
         ViewHolder(View itemView) {
             super(itemView);
-            posterImage=itemView.findViewById(R.id.mymoviposter);
-            likImage=itemView.findViewById(R.id.likeMovieImage);
-            unlikeImage=itemView.findViewById(R.id.unikeMovieImage);
+            posterImage = itemView.findViewById(R.id.mymoviposter);
+            likImage = itemView.findViewById(R.id.likeMovieImage);
+            unlikeImage = itemView.findViewById(R.id.unikeMovieImage);
 //            rating=itemView.findViewById(R.id.rating);
-            moreDetails=itemView.findViewById(R.id.moreDetails);
+            moreDetails = itemView.findViewById(R.id.moreDetails);
 //            filter=itemView.findViewById(R.id.filter);
             // myTextView = itemView.findViewById(R.id.tvAnimalName);
             //itemView.setOnClickListener(this);
@@ -167,12 +170,14 @@ Button moreDetails,likImage,unlikeImage;
             unlikeImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (isloggedin()){    ref.child("users").child(currentFirebaseUser.getUid()).child("disliked").child(mData.get(getAdapterPosition()).getId()+"").setValue(mData.get(getAdapterPosition()));
+                    if (isloggedin()) {
+                        ref.child("users").child(currentFirebaseUser.getUid()).child("disliked").child(mData.get(getAdapterPosition()).getId() + "").setValue(mData.get(getAdapterPosition()));
 
-                        FancyToast.makeText(mcon,"The Movie DisLiked Successfuly",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
-                        manager.scrollToPosition(   getAdapterPosition()+1);
-                        System.out.println("Movie Liked"+mData.get(getAdapterPosition()).getPosters().get(2));}
-else {FancyToast.makeText(mcon,"You Must Login To Make an Action",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
+                        FancyToast.makeText(mcon, "The Movie DisLiked Successfuly", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                        manager.scrollToPosition(getAdapterPosition() + 1);
+                        System.out.println("Movie Liked" + mData.get(getAdapterPosition()).getPosters().get(2));
+                    } else {
+                        FancyToast.makeText(mcon, "You Must Login To Make an Action", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                         Intent gotologin = new Intent(mcon, LoginActivity.class);
                         mcon.startActivity(gotologin);
                     }
@@ -200,9 +205,10 @@ else {FancyToast.makeText(mcon,"You Must Login To Make an Action",FancyToast.LEN
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
-    public boolean isloggedin(){
+
+    public boolean isloggedin() {
         boolean logged = false;
-        logged  = sharedpreferences.getBoolean("logged",false);
+        logged = sharedpreferences.getBoolean("logged", false);
         return logged;
     }
 }

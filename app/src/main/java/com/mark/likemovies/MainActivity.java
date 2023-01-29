@@ -233,6 +233,7 @@ snapHelper.attachToRecyclerView(recyclerView);
             @Override
             public void onResponse(Call<com.mark.likemovies.Models.APImodel> call, Response<com.mark.likemovies.Models.APImodel> response) {
                 apImodel=response.body();
+
                 movieList= apImodel.getData();
                 System.out.println(response.body());
                 Collections.shuffle(movieList);
