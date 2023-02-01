@@ -62,7 +62,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        Picasso.get().load(String.valueOf(mData.get(position).getPosters().get(0).getImage())).placeholder(R.drawable.movieposter).into(holder.posterImage);
+        Picasso.get().load(String.valueOf(mData.get(position).getPosters().get(0).getImage())).placeholder(R.drawable.dummy_image).into(holder.posterImage);
 // holder.rating.setText(mData.get(position).getImDbRating() +" / 10");
         holder.likImage.setOnClickListener(new View.OnClickListener() {
             @Override

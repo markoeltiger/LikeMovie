@@ -65,7 +65,7 @@ public class MoviepredictedListAdapter extends RecyclerView.Adapter<Moviepredict
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Picasso.get().load(mData.get(position).getImage()).placeholder(R.drawable.movieposter).into(holder.posterImage);
+        Picasso.get().load(mData.get(position).getImage()).placeholder(R.drawable.dummy_image).into(holder.posterImage);
 // holder.rating.setText(mData.get(position).getImDbRating() +" / 10");
  holder.likImage.setOnClickListener(new View.OnClickListener() {
      @Override

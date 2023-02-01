@@ -1,5 +1,7 @@
 package com.mark.likemovies.Models.API
 
+import com.mark.likemovies.Models.NewApi.Link
+
 data class Response(
     val current_page: Int,
     val `data`: List<Data>,

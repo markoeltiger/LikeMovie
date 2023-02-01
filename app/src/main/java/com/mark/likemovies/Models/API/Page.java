@@ -2,6 +2,7 @@ package com.mark.likemovies.Models.API;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.mark.likemovies.Models.NewApi.Link;
 
 import java.util.List;
 

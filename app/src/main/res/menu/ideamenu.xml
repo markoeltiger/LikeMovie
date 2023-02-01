@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/filter"
-        android:icon="@drawable/outlineheart"
+        android:icon="@drawable/ic_baseline_heart_broken_24"
         android:iconTint="@color/purple_700"
         android:orderInCategory="300"
 android:iconTintMode="add"
@@ -11,7 +11,7 @@ android:iconTintMode="add"
         app:showAsAction="ifRoom"></item>
     <item
         android:id="@+id/idea"
-        android:icon="@drawable/lamp"
+        android:icon="@drawable/ic_baseline_filter_alt_24"
         android:orderInCategory="300"
         android:title="User"
         app:showAsAction="ifRoom"></item>

@@ -1,0 +1,9 @@
+package com.example.domain.entity.allMovies
+
+
+
+ data class Cast(
+     val id: Int?,
+     val image: String?,
+     val name: String?
+)

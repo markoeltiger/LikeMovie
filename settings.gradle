@@ -17,3 +17,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Like Movies"
 include ':app'
+include ':data'
+include ':domain'

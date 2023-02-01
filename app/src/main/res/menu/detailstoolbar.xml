@@ -4,7 +4,7 @@
 
     <item
     android:id="@+id/love"
-        android:icon="@drawable/outlineheart"
+        android:icon="@drawable/ic_baseline_heart_broken_24"
         android:iconTint="@color/purple_700"
 
         android:orderInCategory="300"
