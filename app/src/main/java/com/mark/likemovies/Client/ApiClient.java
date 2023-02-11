@@ -1,13 +1,16 @@
 package com.mark.likemovies.Client;
 
-import com.mark.likemovies.Models.API.Response;
+ import com.mark.likemovies.Models.API.Response;
 import com.mark.likemovies.Models.APImodel;
 import com.mark.likemovies.Models.FullMovie;
 import com.mark.likemovies.Models.Movie;
 import com.mark.likemovies.Models.MoviesDataClass;
-import com.mark.likemovies.Models.predictedmovie;
+ import com.mark.likemovies.Models.Register.RegisterResponse;
+ import com.mark.likemovies.Models.predictedmovie;
 
-import retrofit2.Call;
+ import org.androidannotations.annotations.rest.Post;
+
+ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
@@ -32,6 +35,13 @@ public interface ApiClient {
      public Call<MoviesDataClass> getSepecificMovies(@Query("Genre") String id);
     @GET("api/entertainment/get")
     public Call<APImodel> getMoviesFromAPI();
+    @Post("/api/auth/register")
+    public Call<RegisterResponse> registerUser(
+            @Query("name") String name,
+            @Query("email") String email,
+            @Query("password") String password,
+            @Query("password_confirmation") String password_confirmation
+    );
 
 
 }

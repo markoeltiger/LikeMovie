@@ -28,10 +28,10 @@ class FilterActivity : AppCompatActivity() {
         }
 
 
-        val quotesApi = RetrofitApiHelper.getInstance().create(SearchApi::class.java)
+        val searchapi = RetrofitApiHelper.getInstance().create(SearchApi::class.java)
         // launching a new coroutine
         GlobalScope.launch {
-            val result = quotesApi.getQuotes("adventure,comedy,crime")
+            val result = searchapi.getSuggestions(user_id = "35","1","drama","usa","2000","2001")
             if (result != null)
             // Checking the results
                 Log.d("ayush: ", result.message().toString())

@@ -1,11 +1,10 @@
 package com.mark.likemovies
-import android.content.ContentValues.TAG
+
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -13,14 +12,19 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-
-import com.google.firebase.ktx.Firebase
+import com.mark.likemovies.Client.ApiClient
+import com.mark.likemovies.Helper.RetrofitApiHelper
 import com.mark.likemovies.Models.user
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -65,12 +69,35 @@ class SignupActivity : AppCompatActivity() {
                Toast.makeText(applicationContext,"Password too short, enter mimimum 6 charcters" , Toast.LENGTH_LONG).show()
 
            }
-           createAccount(email, password)  }
+           createAccount(username,email, password)  }
 
 
     }
-    private fun createAccount(email: String, password: String) {
+    private fun createAccount(username:String,email: String, password: String) {
         // [START create_user_with_email]
+//        val retrofit = Retrofit.Builder()
+//            .baseUrl(Constants.APIBASEURL)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//        val register = RetrofitApiHelper.getInstance().create(ApiClient::class.java)
+//        // launching a new coroutine
+//        GlobalScope.launch {
+//            val result = register.registerUser(username,email,password,password)
+//            result.enqueue(new Callback<com.mark.likemovies.Models.APImodel>() {
+//
+//
+//
+//            }
+//            // Checking the results
+//
+//        }
+
+
+
+
+
+
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -99,7 +126,7 @@ class SignupActivity : AppCompatActivity() {
                 }
             }
         // [END create_user_with_email]
-    }
+    }}
     private fun setStatusBarWhite(activity: AppCompatActivity){
         //Make status bar icons color dark
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
