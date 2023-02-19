@@ -6,12 +6,10 @@ import androidx.room.InvalidationTracker;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
-import com.mark.likemovies.Daos.MovieDao;
 
 abstract class database extends RoomDatabase {
     private static database instance;
-    public static MovieDao movieDao;
-    
+
     @Override
     public void clearAllTables() {
 
