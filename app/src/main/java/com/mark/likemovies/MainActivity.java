@@ -50,18 +50,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-Toolbar toolbar;
-DrawerLayout drawerLayout;
-NavigationView navigationView;
-      RecyclerView recyclerView;
-      List<Data> movieList;
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    RecyclerView recyclerView;
+    List<Data> movieList;
     SharedPreferences sharedpreferences;
 
-    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference mbase;
     APImodel apImodel;
     com.mark.likemovies.Models.API.Response moviecall;
-MovieListAdapter recyclerAdapter;
+    MovieListAdapter recyclerAdapter;
 
 
     @Override
@@ -77,42 +77,46 @@ MovieListAdapter recyclerAdapter;
         int id = item.getItemId();
 
         if (id == R.id.idea) {
-           Intent idea = new Intent(MainActivity.this,FilterActivity.class);
-           startActivity(idea);
+            Intent idea = new Intent(MainActivity.this, FilterActivity.class);
+            startActivity(idea);
             return true;
         }
 
         if (id == R.id.filter) {
-            Intent idea = new Intent(MainActivity.this,FilterActivity.class);
+            Intent idea = new Intent(MainActivity.this, FilterActivity.class);
             startActivity(idea);
             return true;
         }
-       return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        drawerLayout=findViewById(R.id.drawerlayout);
-        toolbar=(Toolbar) findViewById(R.id.toolbar2);
+        drawerLayout = findViewById(R.id.drawerlayout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         FirebaseApp.initializeApp(
                 MainActivity.this);
-          sharedpreferences = getSharedPreferences("sharedpreference", Context.MODE_PRIVATE);
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
+        sharedpreferences = getSharedPreferences("sharedpreference", Context.MODE_PRIVATE);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         SnapHelper snapHelper = new PagerSnapHelper();
         recyclerView.setLayoutManager(layoutManager);
-if (isloggedin()){     mbase
-        = FirebaseDatabase.getInstance().getReference().child("users").child(currentFirebaseUser.getUid());
-}else{   mbase
-        = FirebaseDatabase.getInstance().getReference().child("users").child("guest");}
+        if (isloggedin()) {
+            mbase
+                    = FirebaseDatabase.getInstance().getReference().child("users").child(currentFirebaseUser.getUid());
+        } else {
+            mbase
+                    = FirebaseDatabase.getInstance().getReference().child("users").child("guest");
+        }
 
-snapHelper.attachToRecyclerView(recyclerView);
-        navigationView=findViewById(R.id.main_nav_view);
-        if (!isloggedin()){    navigationView.inflateMenu(R.menu.notloggedin);
+        snapHelper.attachToRecyclerView(recyclerView);
+        navigationView = findViewById(R.id.main_nav_view);
+        if (!isloggedin()) {
+            navigationView.inflateMenu(R.menu.notloggedin);
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -120,11 +124,11 @@ snapHelper.attachToRecyclerView(recyclerView);
 
                     System.out.print(id);
                     if (id == R.id.Nav_Logins) {
-                        Intent loginintent =new Intent(MainActivity.this,LoginActivity.class);
+                        Intent loginintent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(loginintent);
                     }
                     if (id == R.id.Nav_signups) {
-                        Intent signupintent =new Intent(MainActivity.this,SignupActivity.class);
+                        Intent signupintent = new Intent(MainActivity.this, SignupActivity.class);
                         startActivity(signupintent);
                     }
                     return false;
@@ -132,44 +136,45 @@ snapHelper.attachToRecyclerView(recyclerView);
             });
 
 
-
-
-        }else {navigationView.inflateMenu(R.menu.mainmenu);
+        } else {
+            navigationView.inflateMenu(R.menu.mainmenu);
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     int id = item.getItemId();
-                    System.out.print(id+"ass");
+                    System.out.print(id + "ass");
 
                     if (id == R.id.Nav_likes) {
-                        Intent likesintent =new Intent(MainActivity.this,likedmovies.class);
-                        likesintent.putExtra("type","liked");
+                        Intent likesintent = new Intent(MainActivity.this, likedmovies.class);
+                        likesintent.putExtra("type", "liked");
                         startActivity(likesintent);
                     }
 
                     if (id == R.id.Nav_Premuim) {
-                        Intent Subscribeintent =new Intent(MainActivity.this,Subscribe.class);
+                        Intent Subscribeintent = new Intent(MainActivity.this, Subscribe.class);
                         startActivity(Subscribeintent);
                     }
                     if (id == R.id.Nav_waiting_list) {
-                        Intent waitingintent =new Intent(MainActivity.this,likedmovies.class);
-                        waitingintent.putExtra("type","loved");
+                        Intent waitingintent = new Intent(MainActivity.this, likedmovies.class);
+                        waitingintent.putExtra("type", "loved");
 
                         startActivity(waitingintent);
                     }
-                    return false;   }
-            });}
+                    return false;
+                }
+            });
+        }
 
 
         toolbar.showOverflowMenu();
 
         ViewCompat.setLayoutDirection(toolbar, ViewCompat.LAYOUT_DIRECTION_RTL);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openNavigation,R.string.closeNavigation){
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openNavigation, R.string.closeNavigation) {
             @Override
             public boolean onOptionsItemSelected(MenuItem item) {
                 System.out.println("ok");
-                if(item != null && item.getItemId() == android.R.id.home){
+                if (item != null && item.getItemId() == android.R.id.home) {
                     if (drawerLayout.isDrawerOpen((Gravity.LEFT))) {
                         drawerLayout.closeDrawer(Gravity.LEFT);
                     } else {
@@ -179,7 +184,7 @@ snapHelper.attachToRecyclerView(recyclerView);
                 return false;
             }
         };
-        View headerview =navigationView.getHeaderView(0);
+        View headerview = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerview.findViewById(R.id.userName);
         TextView number = (TextView) headerview.findViewById(R.id.userIPhone);
 
@@ -203,8 +208,7 @@ snapHelper.attachToRecyclerView(recyclerView);
         mbase.child("username").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
+
                 String value = dataSnapshot.getValue(String.class);
                 navUsername.setText(value);
                 Log.d(TAG, "Value is: " + value);
@@ -220,32 +224,25 @@ snapHelper.attachToRecyclerView(recyclerView);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        Retrofit retrofit= new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.APIBASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        ApiClient myapiclient =retrofit.create(ApiClient.class);
+        ApiClient myapiclient = retrofit.create(ApiClient.class);
 
-        Call<com.mark.likemovies.Models.APImodel> mainCall =myapiclient.getMoviesFromAPI();
+        Call<com.mark.likemovies.Models.APImodel> mainCall = myapiclient.getMoviesFromAPI();
         mainCall.enqueue(new Callback<com.mark.likemovies.Models.APImodel>() {
             @Override
             public void onResponse(Call<com.mark.likemovies.Models.APImodel> call, Response<com.mark.likemovies.Models.APImodel> response) {
-                apImodel=response.body();
+                apImodel = response.body();
 
-                movieList= apImodel.getData();
+                movieList = apImodel.getData();
                 System.out.println(response.body());
                 Collections.shuffle(movieList);
                 FirebaseApp.initializeApp(MainActivity.this);
-                recyclerAdapter= new MovieListAdapter(MainActivity.this,movieList,layoutManager);
+                recyclerAdapter = new MovieListAdapter(MainActivity.this, movieList, layoutManager);
                 recyclerView.setAdapter(recyclerAdapter);
 
-                System.out.println("weather s" +response.raw().toString());
-
-                System.out.println("weather 1" +movieList.size());
-
-
-
-//
             }
 
             @Override
@@ -257,12 +254,11 @@ snapHelper.attachToRecyclerView(recyclerView);
         });
 
 
-
-
     }
-    public boolean isloggedin(){
+
+    public boolean isloggedin() {
         boolean logged = false;
-        logged  = sharedpreferences.getBoolean("logged",false);
+        logged = sharedpreferences.getBoolean("logged", false);
         return logged;
     }
 }
