@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mark.likemovies.LoginActivity;
-import com.mark.likemovies.Models.Data;
+import com.mark.likemovies.Models.EntertainmentMoviesResponse.Data;
 import com.mark.likemovies.MovieDetails;
 import com.mark.likemovies.R;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -32,7 +32,7 @@ import java.util.List;
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.ViewHolder> {
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference();
-    private List<com.mark.likemovies.Models.Data> mData;
+    private List<com.mark.likemovies.Models.EntertainmentMoviesResponse.Data> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private Context mcon;
@@ -42,7 +42,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     // data is passed into the constructor
-    public MovieListAdapter(Context context, List<com.mark.likemovies.Models.Data> data, LinearLayoutManager manager) {
+    public MovieListAdapter(Context context, List<com.mark.likemovies.Models.EntertainmentMoviesResponse.Data> data, LinearLayoutManager manager) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.mcon = context;

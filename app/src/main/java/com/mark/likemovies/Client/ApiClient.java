@@ -2,7 +2,8 @@ package com.mark.likemovies.Client;
 
  import com.mark.likemovies.Models.API.Response;
 import com.mark.likemovies.Models.APImodel;
-import com.mark.likemovies.Models.FullMovie;
+ import com.mark.likemovies.Models.EntertainmentMoviesResponse.EntertainmentMovieResponse;
+ import com.mark.likemovies.Models.FullMovie;
 import com.mark.likemovies.Models.Movie;
 import com.mark.likemovies.Models.MoviesDataClass;
  import com.mark.likemovies.Models.Register.RegisterResponse;

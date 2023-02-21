@@ -24,6 +24,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
@@ -125,6 +126,12 @@ int position=0;
                 = FirebaseDatabase.getInstance().getReference().child("users").child(currentFirebaseUser.getUid());
         }else{   mbase
                 = FirebaseDatabase.getInstance().getReference().child("users").child("guest");}
+        Intent intent = getIntent();
+
+        String type = intent.getStringExtra("type");
+        if (type=="suggestions"){
+            Toast.makeText(predicted.this,"suggestions",Toast.LENGTH_SHORT).show();
+        }
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager
