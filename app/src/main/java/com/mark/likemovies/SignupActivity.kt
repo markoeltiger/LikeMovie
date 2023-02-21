@@ -25,6 +25,8 @@ import com.mark.likemovies.Helper.RetrofitApiHelper
 import com.mark.likemovies.Models.user
 import com.mark.likemovies.ui.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -80,7 +82,7 @@ class SignupActivity : AppCompatActivity() {
                 ).show()
 
             }
-            viewModel.registerNewUser(username,email,password,password)
+
          }
 
 
