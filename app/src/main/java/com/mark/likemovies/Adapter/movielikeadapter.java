@@ -96,7 +96,7 @@ holder.butn.setOnClickListener(new View.OnClickListener() {
         public itemViewholder(@NonNull View itemView)
         {
             super(itemView);
-            imageView=itemView.findViewById(R.id.avatar);
+            imageView=itemView.findViewById(R.id.movieImageView);
               butn = itemView.findViewById(R.id.mybutton);
             remove = itemView.findViewById(R.id.remove);
 //            movierate = itemView.findViewById(R.id.rate);

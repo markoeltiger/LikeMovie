@@ -1,6 +1,7 @@
 package com.mark.likemovies.data.remote
 
 import com.mark.likemovies.Models.APImodel
+import com.mark.likemovies.data.models.homeMovies.HomeMoviesResponse
 import com.mark.likemovies.data.models.register.RegisterResponse
 import com.mark.likemovies.util.Constants
 import retrofit2.Call
@@ -16,7 +17,7 @@ interface RemoteApiService {
         @Query("password_confirmation") password_confirmation: String?,
         ): RegisterResponse
 
-    @GET(Constants.REGISTER_ENDPOINT)
+    @GET(Constants.MAIN_ENTERTAINMENT_ENDPOINT)
     fun getMoviesFromAPI():
-            APImodel
+            HomeMoviesResponse
 }
