@@ -38,10 +38,10 @@ class MoviePaging( val moviesInterface: RemoteApiService) :
                         null
                     } else {
 
-                        pageIndex + (params.loadSize / 25)
+                        pageIndex + (params.loadSize / 20)
                     }
                 LoadResult.Page(
-                    data = movies!!.toList(),
+                    data = movies!!,
                     prevKey = if (pageIndex == TMDB_STARTING_PAGE_INDEX) null else pageIndex,
                     nextKey = nextKey?.plus(1)
                 )

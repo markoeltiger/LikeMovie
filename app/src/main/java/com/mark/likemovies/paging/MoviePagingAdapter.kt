@@ -1,5 +1,6 @@
 package com.mark.moviesexpert.ui.movie
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,6 @@ import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.mark.likemovies.R
 import com.mark.likemovies.data.models.homeMovies.SingleMovie
 import com.squareup.picasso.Picasso
@@ -48,7 +48,7 @@ class MoviePagingAdapter :
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
          val item = getItem(position)
          if (item!=null){
-             Picasso.get().load(item.posters.get(position).image).placeholder(R.drawable.app_logo_2)
+             Picasso.get().load(item.posters.get(0).image).placeholder(R.drawable.app_logo_2)
                  .into(holder.moviePoster)
 
 
@@ -68,4 +68,8 @@ class MoviePagingAdapter :
     }
 
 
+    override fun getItemCount(): Int {
+       // Log.e("getItemCount",itemCount.toString())
+        return super.getItemCount()
+    }
 }
