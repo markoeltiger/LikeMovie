@@ -19,9 +19,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
-    lateinit var homeRecyclerView:RecyclerView
-    lateinit var drawerLayout:DrawerLayout
-    lateinit var toolbar:Toolbar
+    lateinit var homeRecyclerView: RecyclerView
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var toolbar: Toolbar
     val movieAdapter = MoviePagingAdapter()
     val viewModel: HomeViewModel by viewModels()
 
@@ -34,29 +34,28 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-
-
-
-    fun setupObservers(){
+    fun setupObservers() {
         viewModel.list.observe(this, Observer {
 
             movieAdapter.submitData(lifecycle, it)
         })
     }
-    fun initViews(){
-        homeRecyclerView= findViewById(R.id.recyclerview)
+
+    fun initViews() {
+        homeRecyclerView = findViewById(R.id.recyclerview)
         drawerLayout = findViewById<DrawerLayout>(R.id.drawerlayout)
         toolbar = findViewById<View>(R.id.toolbar2) as Toolbar
         setSupportActionBar(toolbar)
     }
-    private fun setupMainRv(){
+
+    private fun setupMainRv() {
         val layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val snapHelper: SnapHelper = PagerSnapHelper()
         homeRecyclerView.setLayoutManager(layoutManager)
 
         snapHelper.attachToRecyclerView(homeRecyclerView)
-        homeRecyclerView.adapter=movieAdapter
+        homeRecyclerView.adapter = movieAdapter
 
     }
 }

@@ -27,6 +27,7 @@ object ApiModule {
      fun provideRetrofit():Retrofit.Builder{
         return  Retrofit.Builder()
             .baseUrl(Constants.APIBASEURL)
+
             .addConverterFactory(GsonConverterFactory.create())
 
     }

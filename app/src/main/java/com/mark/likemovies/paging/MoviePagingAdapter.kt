@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mark.likemovies.R
 import com.mark.likemovies.data.models.homeMovies.SingleMovie
+import com.squareup.picasso.Picasso
 
 class MoviePagingAdapter :
     PagingDataAdapter<SingleMovie, MoviePagingAdapter.MovieViewHolder>(
@@ -41,16 +42,15 @@ class MoviePagingAdapter :
 
 
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val moviePoster = itemView.findViewById<ImageView>(R.id.movieImageView)
+        val moviePoster = itemView.findViewById<ImageView>(R.id.mymoviposter)
 
     }
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
          val item = getItem(position)
-        if (item!=null){
-            Glide.with(holder.moviePoster.context)
-                .load(item.posters.get(0).image)
-                .placeholder(R.drawable.movieposter)
-                .into(holder.moviePoster)
+         if (item!=null){
+             Picasso.get().load(item.posters.get(position).image).placeholder(R.drawable.app_logo_2)
+                 .into(holder.moviePoster)
+
 
 
         }
@@ -60,6 +60,10 @@ class MoviePagingAdapter :
         parent: ViewGroup,
         viewType: Int
     ): MoviePagingAdapter.MovieViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val view: View = layoutInflater.inflate(R.layout.movieitem, parent, false)
+
+        return MoviePagingAdapter.MovieViewHolder(view)
         TODO("Not yet implemented")
     }
 

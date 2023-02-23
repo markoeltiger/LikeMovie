@@ -5,6 +5,7 @@ import com.mark.likemovies.data.models.homeMovies.HomeMoviesResponse
 import com.mark.likemovies.data.models.register.RegisterResponse
 import com.mark.likemovies.util.Constants
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -18,6 +19,6 @@ interface RemoteApiService {
         ): RegisterResponse
 
     @GET(Constants.MAIN_ENTERTAINMENT_ENDPOINT)
-    fun getMoviesFromAPI():
-            HomeMoviesResponse
+    suspend  fun getMoviesFromAPI():
+         Response<   HomeMoviesResponse>
 }

@@ -5,6 +5,10 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.mark.likemovies.data.models.homeMovies.SingleMovie
 import com.mark.likemovies.data.remote.RemoteApiService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 import retrofit2.HttpException
 
@@ -24,19 +28,20 @@ class MoviePaging( val moviesInterface: RemoteApiService) :
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SingleMovie> {
         val pageIndex = params.key ?: TMDB_STARTING_PAGE_INDEX
+
         return try {
 
                 var data = moviesInterface.getMoviesFromAPI()
-                val movies = data.data
+                val movies = data.body()?.data
                 val nextKey =
-                    if (movies.isEmpty()) {
+                    if (movies?.isEmpty() == true) {
                         null
                     } else {
 
                         pageIndex + (params.loadSize / 25)
                     }
                 LoadResult.Page(
-                    data = movies,
+                    data = movies!!.toList(),
                     prevKey = if (pageIndex == TMDB_STARTING_PAGE_INDEX) null else pageIndex,
                     nextKey = nextKey?.plus(1)
                 )

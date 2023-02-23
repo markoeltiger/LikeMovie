@@ -12,9 +12,10 @@ import com.mark.likemovies.data.remote.RemoteApiService
 import com.mark.likemovies.repo.AuthRepo
 import com.mark.likemovies.repo.HomeRepo
 import com.mark.moviesexpert.ui.movie.MoviePaging
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-
-class HomeViewModel@Inject constructor(
+@HiltViewModel
+public class HomeViewModel@Inject constructor(
     private val homeRepo: HomeRepo,
     private val moviesInterface: RemoteApiService
 
