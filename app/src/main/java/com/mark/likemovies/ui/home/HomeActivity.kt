@@ -88,7 +88,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                         lifecycleScope.launch(Dispatchers.Main) {
                             try {
                                 var likeReactResponse =
-                                    viewModel.reactToEntertainment(0, "like", item!!.id, user_id)
+                                    viewModel.reactToEntertainment(0, "like", user_id, item!!.id)
                                 if (likeReactResponse.isSuccessful && likeReactResponse.body()?.status == true) {
                                     FancyToast.makeText(
                                         this@HomeActivity,
@@ -113,7 +113,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                         lifecycleScope.launch(Dispatchers.Main) {
                             try {
                                 var likeReactResponse =
-                                    viewModel.reactToEntertainment(0, "like", item!!.id, user_id)
+                                    viewModel.reactToEntertainment(0, "like", user_id, item!!.id)
                                 if (likeReactResponse.isSuccessful && likeReactResponse.body()?.status == true) {
                                     FancyToast.makeText(
                                         this@HomeActivity,
