@@ -1,5 +1,7 @@
 package com.mark.likemovies
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +16,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 
 import com.mark.likemovies.ui.auth.AuthViewModel
+import com.mark.likemovies.ui.home.HomeActivity
+import com.mark.likemovies.util.Constants
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -79,6 +83,14 @@ class SignupActivity : AppCompatActivity() {
                     FancyToast.SUCCESS,
                     false
                 ).show()
+                val sharedPreference =  getSharedPreferences(Constants.USER_DETAILS_SharedPrefs, Context.MODE_PRIVATE)
+                var editor = sharedPreference.edit()
+                editor.putString("username","${response.body()?.data?.name}")
+                editor.putString("email","${response.body()?.data?.email}")
+                editor.putString("id","${response.body()?.data?.id}")
+                editor.apply()
+                var HomeIntent = Intent(this@SignupActivity,HomeActivity::class.java)
+                startActivity(HomeIntent)
             }
                 }catch (e:Exception){
                     FancyToast.makeText(
