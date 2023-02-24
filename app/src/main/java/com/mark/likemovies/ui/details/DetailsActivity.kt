@@ -1,17 +1,18 @@
-package com.mark.likemovies.ui.details
+package com.mark.likemovies.ui.  details
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
-import com.mark.likemovies.Adapter.MyRecyclerViewAdapter
 import com.mark.likemovies.R
 import com.mark.likemovies.data.models.homeMovies.SingleMovie
 import dagger.hilt.android.AndroidEntryPoint
@@ -90,18 +91,23 @@ class DetailsActivity : AppCompatActivity() {
         mTabs!!.addTab(mTabs!!.newTab().setText("القصة"), 1, true)
         mTabs!!.background = resources.getDrawable(R.drawable.tabcustomselector)
         currentData.casts.let {
+            castRecyclerView?.setLayoutManager(LinearLayoutManager(this))
             adapter = CastAdapter(this, it)
+            castRecyclerView?.adapter =adapter
 
         }
-        castRecyclerView?.adapter =adapter
         mTabs!!.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 tab.select()
                 tab.view.background = resources.getDrawable(R.drawable.gradient_bg)
                 if (tab.position == 0) {
-                    MovieStory.setText(currentData.casts.toString())
+                    castRecyclerView?.visibility  =View.VISIBLE
+                    MovieStory.visibility=View.GONE
                 } else {
                     try {
+                        MovieStory.visibility=View.VISIBLE
+                        castRecyclerView?.visibility =View.GONE
+
                         MovieStory.setText(currentData.storyAr)
                     } catch (e: Exception) {
                     }
@@ -126,11 +132,14 @@ class DetailsActivity : AppCompatActivity() {
         heros.setOnClickListener {
             heros.setTextColor(Color.parseColor("#EF476f"))
             story.setTextColor(Color.parseColor("#000000"))
-            MovieStory.setText(currentData.casts.toString())
+
+            //   MovieStory.setText(currentData.casts.toString())
         }
         story.setOnClickListener {
             story.setTextColor(Color.parseColor("#EF476f"))
             heros.setTextColor(Color.parseColor("#000000"))
+            MovieStory.visibility=View.VISIBLE
+
             MovieStory.setText(currentData.storyAr)
         }
     }
