@@ -39,6 +39,12 @@
         android:icon="@drawable/ic_baseline_local_atm_24">
 
     </item>
+    <item
+        android:id="@+id/Log_out"
+        android:title="Log Out"
+        android:icon="@drawable/ic_baseline_logout_24">
+
+    </item>
 </group>
 <!--    <group   android:checkableBehavior="single">-->
 <!--        <item-->
