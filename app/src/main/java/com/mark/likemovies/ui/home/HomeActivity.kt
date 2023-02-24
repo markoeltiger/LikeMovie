@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.SnapHelper
 import com.mark.likemovies.R
 import com.mark.likemovies.data.models.homeMovies.SingleMovie
 import com.mark.likemovies.ui.auth.LoginActivity
-import com.mark.likemovies.ui.auth.SignupActivity
 import com.mark.likemovies.ui.details.DetailsActivity
 import com.mark.likemovies.util.Constants
 import com.mark.moviesexpert.ui.movie.MoviePagingAdapter
@@ -32,6 +31,8 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
     lateinit var drawerLayout: DrawerLayout
     lateinit var toolbar: Toolbar
     val movieAdapter = MoviePagingAdapter()
+    var layoutManager: LinearLayoutManager? = null
+
     var user_id = 0
     var user_name = "Guest"
     var user_email = "guest@gooodbad.com"
@@ -60,11 +61,10 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
     }
 
     fun setupMainRv() {
-        val layoutManager =
+          layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val snapHelper: SnapHelper = PagerSnapHelper()
         homeRecyclerView.setLayoutManager(layoutManager)
-
         snapHelper.attachToRecyclerView(homeRecyclerView)
         homeRecyclerView.adapter = movieAdapter
 
@@ -97,6 +97,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                                         FancyToast.SUCCESS,
                                         false
                                     ).show()
+                                    layoutManager?.scrollToPosition(position+1)
                                 }
                             } catch (e: Exception) {
                                 FancyToast.makeText(
@@ -123,6 +124,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                                         FancyToast.CONFUSING,
                                         false
                                     ).show()
+                                    layoutManager?.scrollToPosition(position+1)
 
                                 }
                             } catch (e: Exception) {
