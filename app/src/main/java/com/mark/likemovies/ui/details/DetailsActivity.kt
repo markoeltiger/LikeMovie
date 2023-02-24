@@ -68,10 +68,12 @@ class DetailsActivity : AppCompatActivity() {
         currentData = (intent.getSerializableExtra("data") as? SingleMovie)!!
         MovieName.text=currentData.title
         MovieName.setText(currentData.title)
-        Movieyear.setText(currentData.releaseYear)
+        Movieyear.setText(currentData.releaseYear.toString())
         MovieCrew.setText(currentData.casts.toString())
+        story.text=currentData.storyAr
+        MovieGenre.text=currentData.genresAr
         MovieRate.setText("${currentData.rating}   / 10")
-        this.setTitle(currentData.releaseYear)
+        this.setTitle(currentData.releaseYear.toString())
 
     }
     fun setTaps() {
