@@ -12,9 +12,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+
 import com.mark.likemovies.ui.auth.AuthViewModel
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,8 +21,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignupActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
+
     private var username: EditText? = null
     private var phone: EditText? = null
     private val sharedPrefFile = "sharedpreference"
@@ -44,8 +41,6 @@ class SignupActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         toolbar.setNavigationOnClickListener { super.onBackPressed() }
         setStatusBarWhite(this@SignupActivity)
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().reference
 
         btnSignUp = findViewById(R.id.button_signin) as Button
         phone = findViewById(R.id.et_phone) as EditText

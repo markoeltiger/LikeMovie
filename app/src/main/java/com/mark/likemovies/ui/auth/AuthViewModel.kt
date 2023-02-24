@@ -16,8 +16,8 @@ class AuthViewModel @Inject constructor(
     private val authRepo: AuthRepo,
 
 ): ViewModel(){
-    private val _resp= MutableLiveData<RegisterResponse>()
-    val registerResponse: LiveData<RegisterResponse>
+    private val _resp= MutableLiveData <Response<RegisterResponse>>()
+    val registerResponse: LiveData <Response<RegisterResponse>>
         get()= _resp
     suspend fun registerUser(name:String, email: String, password: String, passwordConfrimation: String) : Response<RegisterResponse>{
     return authRepo.registerNewUser(name,email,password,passwordConfrimation)
