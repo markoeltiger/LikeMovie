@@ -123,6 +123,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                                         FancyToast.CONFUSING,
                                         false
                                     ).show()
+
                                 }
                             } catch (e: Exception) {
                                 FancyToast.makeText(
