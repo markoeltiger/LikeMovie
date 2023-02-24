@@ -1,13 +1,17 @@
 package com.mark.likemovies.ui.details
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
+import com.mark.likemovies.Adapter.MyRecyclerViewAdapter
 import com.mark.likemovies.R
 import com.mark.likemovies.data.models.homeMovies.SingleMovie
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +25,10 @@ class DetailsActivity : AppCompatActivity() {
     lateinit var MovieGenre: TextView
     lateinit var MovieStory: TextView
     lateinit var heros: TextView
+    var mViewPager: ViewPager? = null
+    var castRecyclerView: RecyclerView? = null
+    lateinit var adapter: CastAdapter
+
     lateinit var story: TextView
     var goHome: FloatingActionButton? = null
     var mIndicator: View? = null
@@ -41,9 +49,10 @@ class DetailsActivity : AppCompatActivity() {
 
 
     fun initViews() {
-         mTopToolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
+        mViewPager = findViewById<ViewPager>(R.id.viewPager)
+
+        mTopToolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
         mTabs = findViewById(R.id.tab)
-        //   mTabs.setupWithViewPager(mViewPager);
         //     simpleRatingBar=findViewById(R.id.simpleRatingBar);
         MovieName = findViewById<TextView>(R.id.tvMovieName)
         Movieyear = findViewById<TextView>(R.id.tvMovieYear)
@@ -54,7 +63,7 @@ class DetailsActivity : AppCompatActivity() {
         MovieStory = findViewById(R.id.MovieStory)
         heros = findViewById(R.id.heros)
         mIndicator = findViewById(R.id.indicator)
-
+        castRecyclerView=findViewById(R.id.Casts)
 
         story = findViewById(R.id.story)
         setSupportActionBar(mTopToolbar)
@@ -80,6 +89,11 @@ class DetailsActivity : AppCompatActivity() {
         mTabs!!.addTab(mTabs!!.newTab().setText("الأبطال"), 0)
         mTabs!!.addTab(mTabs!!.newTab().setText("القصة"), 1, true)
         mTabs!!.background = resources.getDrawable(R.drawable.tabcustomselector)
+        currentData.casts.let {
+            adapter = CastAdapter(this, it)
+
+        }
+        castRecyclerView?.adapter =adapter
         mTabs!!.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 tab.select()
@@ -108,6 +122,16 @@ class DetailsActivity : AppCompatActivity() {
                 mIndicator?.getLayoutParams() as FrameLayout.LayoutParams
             indicatorParams.width = indicatorWidth
             mIndicator?.setLayoutParams(indicatorParams)
+        }
+        heros.setOnClickListener {
+            heros.setTextColor(Color.parseColor("#EF476f"))
+            story.setTextColor(Color.parseColor("#000000"))
+            MovieStory.setText(currentData.casts.toString())
+        }
+        story.setOnClickListener {
+            story.setTextColor(Color.parseColor("#EF476f"))
+            heros.setTextColor(Color.parseColor("#000000"))
+            MovieStory.setText(currentData.storyAr)
         }
     }
 }
