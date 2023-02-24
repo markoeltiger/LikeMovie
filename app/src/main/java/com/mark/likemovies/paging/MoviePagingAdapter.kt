@@ -31,8 +31,8 @@ class MoviePagingAdapter :
             }
 
             override fun areContentsTheSame(
-                oldItem:SingleMovie,
-                newItem:SingleMovie
+                oldItem: SingleMovie,
+                newItem: SingleMovie
             ): Boolean {
                 return oldItem == newItem
             }
@@ -47,20 +47,26 @@ class MoviePagingAdapter :
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val moviePoster = itemView.findViewById<ImageView>(R.id.mymoviposter)
         val movieDetails = itemView.findViewById<Button>(R.id.moreDetails)
+        val likeBtn = itemView.findViewById<Button>(R.id.likeMovieImage)
+        val desLikeBtn = itemView.findViewById<Button>(R.id.unikeMovieImage)
 
     }
+
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-         val item = getItem(position)
+        val item = getItem(position)
 
-         if (item!=null){
-             holder.movieDetails.setOnClickListener {
-
-                 mListener?.onItemClick(position, "details",item)
-
-             }
-             Picasso.get().load(item.posters.get(0).image).placeholder(R.drawable.app_logo_2)
-                 .into(holder.moviePoster)
-
+        if (item != null) {
+            holder.movieDetails.setOnClickListener {
+                mListener?.onItemClick(position, "details", item)
+            }
+            holder.likeBtn.setOnClickListener {
+                mListener?.onItemClick(position, "like", item)
+            }
+            holder.desLikeBtn.setOnClickListener {
+                mListener?.onItemClick(position, "dislike", item)
+            }
+            Picasso.get().load(item.posters.get(0).image).placeholder(R.drawable.app_logo_2)
+                .into(holder.moviePoster)
 
 
         }
@@ -79,9 +85,10 @@ class MoviePagingAdapter :
 
 
     override fun getItemCount(): Int {
-       // Log.e("getItemCount",itemCount.toString())
+        // Log.e("getItemCount",itemCount.toString())
         return super.getItemCount()
     }
+
     fun setOnItemClickListener(clickListener: OnItemClicked) {
         this.mListener = clickListener
     }

@@ -36,11 +36,11 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
     var user_name = "Guest"
     var user_email = "guest@gooodbad.com"
     val viewModel: HomeViewModel by viewModels()
-    lateinit var sharedpreferences:SharedPreferences
+    lateinit var sharedpreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-          sharedpreferences = getSharedPreferences(
+        sharedpreferences = getSharedPreferences(
             Constants.USER_DETAILS_SharedPrefs,
             android.content.Context.MODE_PRIVATE
         )
@@ -84,20 +84,22 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                         val intent = Intent(this@HomeActivity, DetailsActivity::class.java)
                         intent.putExtra("data", item)
                         startActivity(intent)
-                    }else if (actionType=="like"){
+                    } else if (actionType == "like") {
                         lifecycleScope.launch(Dispatchers.Main) {
-                        try {
-                            var likeReactResponse = viewModel.reactToEntertainment(0,"like",item!!.id,user_id)
-                            if (likeReactResponse.isSuccessful&&likeReactResponse.body()?.status==true){
-                                FancyToast.makeText(
-                                    this@HomeActivity,
-                                    "تم الإعجاب بالفيلم بنجاح",
-                                    FancyToast.LENGTH_LONG,
-                                    FancyToast.ERROR,
-                                    false
-                                ).show()
+                            try {
+                                var likeReactResponse =
+                                    viewModel.reactToEntertainment(0, "like", item!!.id, user_id)
+                                if (likeReactResponse.isSuccessful && likeReactResponse.body()?.status == true) {
+                                    FancyToast.makeText(
+                                        this@HomeActivity,
+                                        "تم الإعجاب بالفيلم بنجاح",
+                                        FancyToast.LENGTH_LONG,
+                                        FancyToast.ERROR,
+                                        false
+                                    ).show()
+                                }
+                            } catch (e: Exception) {
                             }
-                        }catch (e:Exception){}
                             FancyToast.makeText(
                                 this@HomeActivity,
                                 "حدث خطأ أثناء الإعجاب بالفيلم برجاء المحاولة مرة اخري",
@@ -107,23 +109,25 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                             ).show()
 
                         }
-                    }else if (actionType=="dislike"){
+                    } else if (actionType == "dislike") {
                         lifecycleScope.launch(Dispatchers.Main) {
                             try {
-                                var likeReactResponse = viewModel.reactToEntertainment(0,"like",item!!.id,user_id)
-                                if (likeReactResponse.isSuccessful&&likeReactResponse.body()?.status==true){
+                                var likeReactResponse =
+                                    viewModel.reactToEntertainment(0, "like", item!!.id, user_id)
+                                if (likeReactResponse.isSuccessful && likeReactResponse.body()?.status == true) {
                                     FancyToast.makeText(
                                         this@HomeActivity,
-                                        "تم الإعجاب بالفيلم بنجاح",
+                                        "تم الغاء الإعجاب بالفيلم بنجاح",
                                         FancyToast.LENGTH_LONG,
                                         FancyToast.ERROR,
                                         false
                                     ).show()
                                 }
-                            }catch (e:Exception){}
+                            } catch (e: Exception) {
+                            }
                             FancyToast.makeText(
                                 this@HomeActivity,
-                                "حدث خطأ أثناء الإعجاب بالفيلم برجاء المحاولة مرة اخري",
+                                "حدث خطأ أثناء إلغاء الإعجاب بالفيلم برجاء المحاولة مرة اخري",
                                 FancyToast.LENGTH_LONG,
                                 FancyToast.ERROR,
                                 false
@@ -160,10 +164,10 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
     fun isloggedin(): Boolean {
         var logged = false
         logged = sharedpreferences.getBoolean("logged", false)
-        if (!logged){
-            user_id= sharedpreferences.getString("id","0")?.toInt()!!
-            user_email= sharedpreferences.getString("email","guest@gooodbad.com")!!
-            user_name= sharedpreferences.getString("username","Guest")!!
+        if (!logged) {
+            user_id = sharedpreferences.getString("id", "0")?.toInt()!!
+            user_email = sharedpreferences.getString("email", "guest@gooodbad.com")!!
+            user_name = sharedpreferences.getString("username", "Guest")!!
 
         }
         return logged
