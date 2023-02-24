@@ -2,8 +2,9 @@ package com.mark.likemovies.data.models.homeMovies
 
 import com.google.gson.annotations.SerializedName
 
+import java.io.Serializable
 
-data class SingleMovie(
+data class SingleMovie (
     @SerializedName("casts")
     val casts: List<Cast>,
     @SerializedName("country_of_origin")
@@ -32,4 +33,4 @@ data class SingleMovie(
     val typeEn: String,
     @SerializedName("type_id")
     val typeId: Int
-)
+) : Serializable

@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -17,6 +18,8 @@ class MoviePagingAdapter :
         DIFF_UTIL
     ) {
     var onCLick: ((String) -> Unit)? = null
+
+    private var mListener: OnItemClicked? = null
 
     companion object {
         val DIFF_UTIL = object : DiffUtil.ItemCallback<SingleMovie>() {
@@ -43,11 +46,18 @@ class MoviePagingAdapter :
 
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val moviePoster = itemView.findViewById<ImageView>(R.id.mymoviposter)
+        val movieDetails = itemView.findViewById<Button>(R.id.moreDetails)
 
     }
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
          val item = getItem(position)
+
          if (item!=null){
+             holder.movieDetails.setOnClickListener {
+
+                 mListener?.onItemClick(position, "details",item)
+
+             }
              Picasso.get().load(item.posters.get(0).image).placeholder(R.drawable.app_logo_2)
                  .into(holder.moviePoster)
 
@@ -71,5 +81,12 @@ class MoviePagingAdapter :
     override fun getItemCount(): Int {
        // Log.e("getItemCount",itemCount.toString())
         return super.getItemCount()
+    }
+    fun setOnItemClickListener(clickListener: OnItemClicked) {
+        this.mListener = clickListener
+    }
+
+    interface OnItemClicked {
+        fun onItemClick(position: Int, fileId: String, item: SingleMovie?)
     }
 }
