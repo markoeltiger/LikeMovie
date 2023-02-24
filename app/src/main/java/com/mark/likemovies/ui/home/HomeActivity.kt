@@ -1,6 +1,7 @@
 package com.mark.likemovies.ui.home
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.mark.likemovies.R
 import com.mark.likemovies.data.models.homeMovies.SingleMovie
+import com.mark.likemovies.ui.auth.LoginActivity
+import com.mark.likemovies.ui.auth.SignupActivity
 import com.mark.likemovies.ui.details.DetailsActivity
 import com.mark.likemovies.util.Constants
 import com.mark.moviesexpert.ui.movie.MoviePagingAdapter
@@ -33,14 +36,15 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
     var user_name = "Guest"
     var user_email = "guest@gooodbad.com"
     val viewModel: HomeViewModel by viewModels()
-    var sharedpreferences = getSharedPreferences(
-        Constants.USER_DETAILS_SharedPrefs,
-        android.content.Context.MODE_PRIVATE
-    )
-
+    lateinit var sharedpreferences:SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+          sharedpreferences = getSharedPreferences(
+            Constants.USER_DETAILS_SharedPrefs,
+            android.content.Context.MODE_PRIVATE
+        )
+
         initViews()
         setupMainRv()
         setupObservers()
@@ -137,7 +141,11 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                         FancyToast.ERROR,
                         false
                     ).show()
-
+                    val signinintent = Intent(
+                        this@HomeActivity,
+                        LoginActivity::class.java
+                    )
+                    startActivity(signinintent)
                 }
             }
         })

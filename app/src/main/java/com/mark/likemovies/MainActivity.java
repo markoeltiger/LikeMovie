@@ -39,6 +39,7 @@ import com.mark.likemovies.Client.ApiClient;
 import com.mark.likemovies.Models.APImodel;
 import com.mark.likemovies.Models.Data;
 import com.mark.likemovies.ui.auth.LoginActivity;
+import com.mark.likemovies.ui.auth.SignupActivity;
 import com.mark.likemovies.util.Constants;
 
 import java.util.Collections;
@@ -125,7 +126,7 @@ snapHelper.attachToRecyclerView(recyclerView);
                         startActivity(loginintent);
                     }
                     if (id == R.id.Nav_signups) {
-                        Intent signupintent =new Intent(MainActivity.this,SignupActivity.class);
+                        Intent signupintent =new Intent(MainActivity.this, SignupActivity.class);
                         startActivity(signupintent);
                     }
                     return false;
