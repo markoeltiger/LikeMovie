@@ -22,7 +22,8 @@ class AuthViewModel @Inject constructor(
     suspend fun registerUser(name:String, email: String, password: String, passwordConfrimation: String) : Response<RegisterResponse>{
     return authRepo.registerNewUser(name,email,password,passwordConfrimation)
     }
-//    fun registerNewUser(name: String,email: String,password: String,passwordConfrimation: String) = viewModelScope.launch {
-//         _resp.postValue(authRepo.registerNewUser(name, email ,password,passwordConfrimation))
-//    }
+    suspend fun signIn(  email: String, password: String ) : Response<RegisterResponse>{
+        return authRepo.signIn( email,password )
+    }
+
 }

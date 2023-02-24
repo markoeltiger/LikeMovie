@@ -22,6 +22,15 @@ interface RemoteApiService {
         @Query("password_confirmation") password_confirmation: String?,
         ): Response<RegisterResponse>
 
+    @Headers("Accept: application/json",
+        "Content-Type: application/json")
+    @POST(Constants.SIGNIN_ENDPOINT)
+    suspend fun SignIn(
+        @Query("email") email: String?,
+        @Query("password") password: String?,
+
+    ): Response<RegisterResponse>
+
     @GET(Constants.MAIN_ENTERTAINMENT_ENDPOINT)
     suspend  fun getMoviesFromAPI():
          Response<HomeMoviesResponse>

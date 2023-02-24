@@ -11,4 +11,7 @@ class AuthRepo  @Inject constructor(
     suspend fun registerNewUser(name:String,email:String,password:String,conirmation_password:String): Response<RegisterResponse> {
         return apiService.RegisterNewUser(name,email,password,conirmation_password)
     }
+    suspend fun signIn( email:String,password:String ): Response<RegisterResponse> {
+        return apiService.SignIn( email,password  )
+    }
 }
