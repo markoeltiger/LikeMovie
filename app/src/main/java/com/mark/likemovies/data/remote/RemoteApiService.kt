@@ -24,7 +24,7 @@ interface RemoteApiService {
         ): Response<RegisterResponse>
     @Headers("Accept: application/json",
         "Content-Type: application/json")
-    @POST(Constants.REGISTER_ENDPOINT)
+    @POST(Constants.REACT_ENDPOINT)
     suspend fun React(
         @Query("un") un: Int?,
         @Query("reaction") reaction: String?,

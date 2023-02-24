@@ -89,24 +89,25 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                             try {
                                 var likeReactResponse =
                                     viewModel.reactToEntertainment(0, "like", user_id, item!!.id)
-                                if (likeReactResponse.isSuccessful && likeReactResponse.body()?.status == true) {
+                                if (likeReactResponse.isSuccessful ) {
                                     FancyToast.makeText(
                                         this@HomeActivity,
                                         "تم الإعجاب بالفيلم بنجاح",
                                         FancyToast.LENGTH_LONG,
-                                        FancyToast.ERROR,
+                                        FancyToast.SUCCESS,
                                         false
                                     ).show()
                                 }
                             } catch (e: Exception) {
+                                FancyToast.makeText(
+                                    this@HomeActivity,
+                                    "حدث خطأ أثناء الإعجاب بالفيلم برجاء المحاولة مرة اخري",
+                                    FancyToast.LENGTH_LONG,
+                                    FancyToast.ERROR,
+                                    false
+                                ).show()
+
                             }
-                            FancyToast.makeText(
-                                this@HomeActivity,
-                                "حدث خطأ أثناء الإعجاب بالفيلم برجاء المحاولة مرة اخري",
-                                FancyToast.LENGTH_LONG,
-                                FancyToast.ERROR,
-                                false
-                            ).show()
 
                         }
                     } else if (actionType == "dislike") {
@@ -114,24 +115,25 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                             try {
                                 var likeReactResponse =
                                     viewModel.reactToEntertainment(0, "like", user_id, item!!.id)
-                                if (likeReactResponse.isSuccessful && likeReactResponse.body()?.status == true) {
+                                if (likeReactResponse.isSuccessful ) {
                                     FancyToast.makeText(
                                         this@HomeActivity,
                                         "تم الغاء الإعجاب بالفيلم بنجاح",
                                         FancyToast.LENGTH_LONG,
-                                        FancyToast.ERROR,
+                                        FancyToast.CONFUSING,
                                         false
                                     ).show()
                                 }
                             } catch (e: Exception) {
+                                FancyToast.makeText(
+                                    this@HomeActivity,
+                                    "حدث خطأ أثناء إلغاء الإعجاب بالفيلم برجاء المحاولة مرة اخري",
+                                    FancyToast.LENGTH_LONG,
+                                    FancyToast.ERROR,
+                                    false
+                                ).show()
+
                             }
-                            FancyToast.makeText(
-                                this@HomeActivity,
-                                "حدث خطأ أثناء إلغاء الإعجاب بالفيلم برجاء المحاولة مرة اخري",
-                                FancyToast.LENGTH_LONG,
-                                FancyToast.ERROR,
-                                false
-                            ).show()
 
                         }
                     }
@@ -164,7 +166,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
     fun isloggedin(): Boolean {
         var logged = false
         logged = sharedpreferences.getBoolean("logged", false)
-        if (!logged) {
+        if (logged) {
             user_id = sharedpreferences.getString("id", "0")?.toInt()!!
             user_email = sharedpreferences.getString("email", "guest@gooodbad.com")!!
             user_name = sharedpreferences.getString("username", "Guest")!!
