@@ -283,6 +283,14 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                     )
                     startActivity(Subscribeintent)
                 }
+                if (id == R.id.Log_out) {
+                    val logoutIntent = Intent(
+                        this,
+                        LoginActivity::class.java
+                    )
+                    startActivity(logoutIntent)
+                    sharedpreferences.edit().clear().apply()
+                }
                 if (id == R.id.Nav_waiting_list) {
                     val waitingintent = Intent(
                         this,
