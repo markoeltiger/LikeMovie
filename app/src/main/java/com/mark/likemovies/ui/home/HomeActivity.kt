@@ -3,12 +3,15 @@ package com.mark.likemovies.ui.home
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -232,8 +235,8 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
     }
     fun setupNavigationDrawer() {
         if (!isloggedin()) {
-            navigationView.inflateMenu(R.menu.notloggedin)
-            navigationView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
+            navigationView?.inflateMenu(R.menu.notloggedin)
+            navigationView?.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
                 val id = item.itemId
                 print(id)
                 if (id == R.id.Nav_Logins) {
@@ -253,8 +256,8 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                 false
             })
         } else {
-            navigationView.inflateMenu(R.menu.mainmenu)
-            navigationView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
+            navigationView?.inflateMenu(R.menu.mainmenu)
+            navigationView?.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
                 val id = item.itemId
                 print(id.toString() + "ass")
                 if (id == R.id.Nav_likes) {
@@ -283,6 +286,32 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                 false
             })
         }
+        toolbar.showOverflowMenu()
+
+        ViewCompat.setLayoutDirection(toolbar, ViewCompat.LAYOUT_DIRECTION_RTL)
+
+        val toggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
+            this,
+            drawerLayout,
+            toolbar,
+            R.string.openNavigation,
+            R.string.closeNavigation
+        ) {
+            override fun onOptionsItemSelected(item: MenuItem): Boolean {
+                println("ok")
+                if (item != null && item.itemId == android.R.id.home) {
+                    if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                        drawerLayout.closeDrawer(Gravity.LEFT)
+                    } else {
+                        drawerLayout.openDrawer(Gravity.LEFT)
+                    }
+                }
+                return false
+            }
+        }
+
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
     }
 
