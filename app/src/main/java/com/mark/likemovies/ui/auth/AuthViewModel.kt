@@ -8,6 +8,7 @@ import com.mark.likemovies.data.models.register.RegisterResponse
 import com.mark.likemovies.repo.AuthRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,8 +19,10 @@ class AuthViewModel @Inject constructor(
     private val _resp= MutableLiveData<RegisterResponse>()
     val registerResponse: LiveData<RegisterResponse>
         get()= _resp
-
-    fun registerNewUser(name: String,email: String,password: String,passwordConfrimation: String) = viewModelScope.launch {
-         _resp.postValue(authRepo.registerNewUser(name, email ,password,passwordConfrimation))
+    suspend fun registerUser(name:String, email: String, password: String, passwordConfrimation: String) : Response<RegisterResponse>{
+    return authRepo.registerNewUser(name,email,password,passwordConfrimation)
     }
+//    fun registerNewUser(name: String,email: String,password: String,passwordConfrimation: String) = viewModelScope.launch {
+//         _resp.postValue(authRepo.registerNewUser(name, email ,password,passwordConfrimation))
+//    }
 }

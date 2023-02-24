@@ -1,4 +1,4 @@
-package com.mark.likemovies.ui.  details
+package com.mark.likemovies.ui.details
 
 import android.graphics.Color
 import android.os.Bundle
@@ -36,7 +36,7 @@ class DetailsActivity : AppCompatActivity() {
     private var indicatorWidth = 0
 
     var mTopToolbar: Toolbar? = null
-    lateinit var currentData :SingleMovie
+    lateinit var currentData: SingleMovie
     var mTabs: TabLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +45,6 @@ class DetailsActivity : AppCompatActivity() {
         getAndSetData()
         setTaps()
     }
-
-
 
 
     fun initViews() {
@@ -64,7 +62,7 @@ class DetailsActivity : AppCompatActivity() {
         MovieStory = findViewById(R.id.MovieStory)
         heros = findViewById(R.id.heros)
         mIndicator = findViewById(R.id.indicator)
-        castRecyclerView=findViewById(R.id.Casts)
+        castRecyclerView = findViewById(R.id.Casts)
 
         story = findViewById(R.id.story)
         setSupportActionBar(mTopToolbar)
@@ -76,16 +74,17 @@ class DetailsActivity : AppCompatActivity() {
 
     fun getAndSetData() {
         currentData = (intent.getSerializableExtra("data") as? SingleMovie)!!
-        MovieName.text=currentData.title
+        MovieName.text = currentData.title
         MovieName.setText(currentData.title)
         Movieyear.setText(currentData.releaseYear.toString())
         MovieCrew.setText(currentData.casts.toString())
-        story.text=currentData.storyAr
-        MovieGenre.text=currentData.genresAr
+        story.text = currentData.storyAr
+        MovieGenre.text = currentData.genresAr
         MovieRate.setText("${currentData.rating}   / 10")
         this.setTitle(currentData.releaseYear.toString())
 
     }
+
     fun setTaps() {
         mTabs!!.addTab(mTabs!!.newTab().setText("الأبطال"), 0)
         mTabs!!.addTab(mTabs!!.newTab().setText("القصة"), 1, true)
@@ -93,7 +92,7 @@ class DetailsActivity : AppCompatActivity() {
         currentData.casts.let {
             castRecyclerView?.setLayoutManager(LinearLayoutManager(this))
             adapter = CastAdapter(this, it)
-            castRecyclerView?.adapter =adapter
+            castRecyclerView?.adapter = adapter
 
         }
         mTabs!!.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -101,12 +100,12 @@ class DetailsActivity : AppCompatActivity() {
                 tab.select()
                 tab.view.background = resources.getDrawable(R.drawable.gradient_bg)
                 if (tab.position == 0) {
-                    castRecyclerView?.visibility  =View.VISIBLE
-                    MovieStory.visibility=View.GONE
+                    castRecyclerView?.visibility = View.VISIBLE
+                    MovieStory.visibility = View.GONE
                 } else {
                     try {
-                        MovieStory.visibility=View.VISIBLE
-                        castRecyclerView?.visibility =View.GONE
+                        MovieStory.visibility = View.VISIBLE
+                        castRecyclerView?.visibility = View.GONE
 
                         MovieStory.setText(currentData.storyAr)
                     } catch (e: Exception) {
@@ -138,7 +137,7 @@ class DetailsActivity : AppCompatActivity() {
         story.setOnClickListener {
             story.setTextColor(Color.parseColor("#EF476f"))
             heros.setTextColor(Color.parseColor("#000000"))
-            MovieStory.visibility=View.VISIBLE
+            MovieStory.visibility = View.VISIBLE
 
             MovieStory.setText(currentData.storyAr)
         }

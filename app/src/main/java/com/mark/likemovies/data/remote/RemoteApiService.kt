@@ -16,9 +16,9 @@ interface RemoteApiService {
         @Query("email") email: String?,
         @Query("password") password: String?,
         @Query("password_confirmation") password_confirmation: String?,
-        ): RegisterResponse
+        ): Response<RegisterResponse>
 
     @GET(Constants.MAIN_ENTERTAINMENT_ENDPOINT)
     suspend  fun getMoviesFromAPI():
-         Response<   HomeMoviesResponse>
+         Response<HomeMoviesResponse>
 }

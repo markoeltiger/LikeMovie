@@ -1,13 +1,9 @@
 package com.mark.likemovies
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -15,19 +11,16 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.mark.likemovies.Client.ApiClient
-import com.mark.likemovies.Helper.RetrofitApiHelper
-import com.mark.likemovies.Models.user
 import com.mark.likemovies.ui.auth.AuthViewModel
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
+
 @AndroidEntryPoint
 class SignupActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -80,7 +73,30 @@ class SignupActivity : AppCompatActivity() {
                 ).show()
 
             }
-            viewModel.registerNewUser(username,email,password,password)
+            lifecycleScope.launch(Dispatchers.Main){
+                try {
+                 var response =  viewModel.registerUser(username,email,password,password)
+            if (response.isSuccessful){
+                FancyToast.makeText(
+                    this@SignupActivity,
+                    "${response.body()?.message}",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.SUCCESS,
+                    false
+                ).show()
+            }
+                }catch (e:Exception){
+                    FancyToast.makeText(
+                        this@SignupActivity,
+                        "هناك خطأ في إنشاء الحساب برجاء مراجعة البيانات",
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.ERROR,
+                        false
+                    ).show()
+
+                }
+
+            }
          }
 
 
