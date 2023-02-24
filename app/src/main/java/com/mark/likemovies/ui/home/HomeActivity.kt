@@ -3,6 +3,8 @@ package com.mark.likemovies.ui.home
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
+import com.mark.likemovies.FilterActivity
 import com.mark.likemovies.R
 import com.mark.likemovies.data.models.homeMovies.SingleMovie
 import com.mark.likemovies.ui.auth.LoginActivity
@@ -38,6 +41,65 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
     var user_email = "guest@gooodbad.com"
     val viewModel: HomeViewModel by viewModels()
     lateinit var sharedpreferences: SharedPreferences
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.ideamenu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        if (id == R.id.idea) {
+            if (isloggedin()) {
+                val idea = Intent(
+                    this,
+                    FilterActivity::class.java
+                )
+                startActivity(idea)
+                return true
+            } else {
+                FancyToast.makeText(
+                    this,
+                    "You Must Login To Make an action",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+                val gotologin = Intent(
+                    this,
+                    LoginActivity::class.java
+                )
+                startActivity(gotologin)
+            }
+        }
+        if (id == R.id.filter) {
+            if (isloggedin()) {
+                FancyToast.makeText(
+                    this,
+                    "Added To Loved Movies",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.SUCCESS,
+                    false
+                ).show()
+                item.setIcon(R.drawable.ic_baseline_favorite_24)
+                return true
+            } else {
+                FancyToast.makeText(
+                    this,
+                    "You Must Login To Make an action",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+                val gotologin = Intent(
+                    this,
+                    LoginActivity::class.java
+                )
+                startActivity(gotologin)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -61,7 +123,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
     }
 
     fun setupMainRv() {
-          layoutManager =
+        layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val snapHelper: SnapHelper = PagerSnapHelper()
         homeRecyclerView.setLayoutManager(layoutManager)
@@ -89,7 +151,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                             try {
                                 var likeReactResponse =
                                     viewModel.reactToEntertainment(0, "like", user_id, item!!.id)
-                                if (likeReactResponse.isSuccessful ) {
+                                if (likeReactResponse.isSuccessful) {
                                     FancyToast.makeText(
                                         this@HomeActivity,
                                         "تم الإعجاب بالفيلم بنجاح",
@@ -97,7 +159,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                                         FancyToast.SUCCESS,
                                         false
                                     ).show()
-                                    layoutManager?.scrollToPosition(position+1)
+                                    layoutManager?.scrollToPosition(position + 1)
                                 }
                             } catch (e: Exception) {
                                 FancyToast.makeText(
@@ -116,7 +178,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                             try {
                                 var likeReactResponse =
                                     viewModel.reactToEntertainment(0, "like", user_id, item!!.id)
-                                if (likeReactResponse.isSuccessful ) {
+                                if (likeReactResponse.isSuccessful) {
                                     FancyToast.makeText(
                                         this@HomeActivity,
                                         "تم الغاء الإعجاب بالفيلم بنجاح",
@@ -124,7 +186,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                                         FancyToast.CONFUSING,
                                         false
                                     ).show()
-                                    layoutManager?.scrollToPosition(position+1)
+                                    layoutManager?.scrollToPosition(position + 1)
 
                                 }
                             } catch (e: Exception) {
