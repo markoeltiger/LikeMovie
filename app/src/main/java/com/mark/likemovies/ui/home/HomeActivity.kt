@@ -259,8 +259,16 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
             navigationView?.inflateMenu(R.menu.mainmenu)
             navigationView?.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
                 val id = item.itemId
-                print(id.toString() + "ass")
-                if (id == R.id.Nav_likes) {
+                if (id == R.id.Nav_home) {
+
+                        if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                            drawerLayout.closeDrawer(Gravity.RIGHT)
+                        } else {
+                            drawerLayout.openDrawer(Gravity.RIGHT)
+                        }
+
+                }
+                 if (id == R.id.Nav_likes) {
                     val likesintent = Intent(
                         this,
                         likedmovies::class.java
@@ -298,12 +306,11 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
             R.string.closeNavigation
         ) {
             override fun onOptionsItemSelected(item: MenuItem): Boolean {
-                println("ok")
-                if (item != null && item.itemId == android.R.id.home) {
-                    if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                        drawerLayout.closeDrawer(Gravity.LEFT)
+                 if (item != null && item.itemId == android.R.id.home) {
+                    if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                        drawerLayout.closeDrawer(Gravity.RIGHT)
                     } else {
-                        drawerLayout.openDrawer(Gravity.LEFT)
+                        drawerLayout.openDrawer(Gravity.RIGHT)
                     }
                 }
                 return false
