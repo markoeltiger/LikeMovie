@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/filter"
-        android:icon="@drawable/ic_baseline_heart_broken_24"
+        android:icon="@drawable/outlineheart"
         android:iconTint="@color/purple_700"
         android:orderInCategory="300"
 android:iconTintMode="add"
