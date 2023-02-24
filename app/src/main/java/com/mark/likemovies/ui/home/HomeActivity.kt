@@ -16,10 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
+import com.google.android.material.navigation.NavigationView
 import com.mark.likemovies.FilterActivity
 import com.mark.likemovies.R
+import com.mark.likemovies.Subscribe
 import com.mark.likemovies.data.models.homeMovies.SingleMovie
+import com.mark.likemovies.likedmovies
 import com.mark.likemovies.ui.auth.LoginActivity
+import com.mark.likemovies.ui.auth.SignupActivity
 import com.mark.likemovies.ui.details.DetailsActivity
 import com.mark.likemovies.util.Constants
 import com.mark.moviesexpert.ui.movie.MoviePagingAdapter
@@ -32,6 +36,8 @@ import kotlinx.coroutines.launch
 class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
     lateinit var homeRecyclerView: RecyclerView
     lateinit var drawerLayout: DrawerLayout
+    var navigationView: NavigationView? = null
+
     lateinit var toolbar: Toolbar
     val movieAdapter = MoviePagingAdapter()
     var layoutManager: LinearLayoutManager? = null
@@ -111,7 +117,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
         initViews()
         setupMainRv()
         setupObservers()
-
+        setupNavigationDrawer()
     }
 
 
@@ -136,9 +142,10 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
         homeRecyclerView = findViewById(R.id.recyclerview)
         drawerLayout = findViewById<DrawerLayout>(R.id.drawerlayout)
         toolbar = findViewById<View>(R.id.toolbar2) as Toolbar
+        navigationView = findViewById(R.id.main_nav_view)
+
         setSupportActionBar(toolbar)
         movieAdapter.setOnItemClickListener(object : MoviePagingAdapter.OnItemClicked {
-//un default is zerrooo
 
             override fun onItemClick(position: Int, actionType: String, item: SingleMovie?) {
                 if (isloggedin()) {
@@ -221,6 +228,61 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
             }
         })
 
+
+    }
+    fun setupNavigationDrawer() {
+        if (!isloggedin()) {
+            navigationView.inflateMenu(R.menu.notloggedin)
+            navigationView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
+                val id = item.itemId
+                print(id)
+                if (id == R.id.Nav_Logins) {
+                    val loginintent = Intent(
+                        this,
+                        LoginActivity::class.java
+                    )
+                    startActivity(loginintent)
+                }
+                if (id == R.id.Nav_signups) {
+                    val signupintent = Intent(
+                        this,
+                        SignupActivity::class.java
+                    )
+                    startActivity(signupintent)
+                }
+                false
+            })
+        } else {
+            navigationView.inflateMenu(R.menu.mainmenu)
+            navigationView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
+                val id = item.itemId
+                print(id.toString() + "ass")
+                if (id == R.id.Nav_likes) {
+                    val likesintent = Intent(
+                        this,
+                        likedmovies::class.java
+                    )
+                    likesintent.putExtra("type", "liked")
+                    startActivity(likesintent)
+                }
+                if (id == R.id.Nav_Premuim) {
+                    val Subscribeintent = Intent(
+                        this,
+                        Subscribe::class.java
+                    )
+                    startActivity(Subscribeintent)
+                }
+                if (id == R.id.Nav_waiting_list) {
+                    val waitingintent = Intent(
+                        this,
+                        likedmovies::class.java
+                    )
+                    waitingintent.putExtra("type", "loved")
+                    startActivity(waitingintent)
+                }
+                false
+            })
+        }
 
     }
 
