@@ -42,6 +42,9 @@
             android:name=".MovieDetails"
             android:exported="false" />
         <activity
+            android:name=".ui.details.DetailsActivity"
+            android:exported="false" />
+        <activity
         android:name=".MainActivity"
         android:exported="true" >
 

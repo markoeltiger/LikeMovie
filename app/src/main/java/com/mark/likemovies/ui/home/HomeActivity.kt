@@ -2,7 +2,9 @@ package com.mark.likemovies.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -20,6 +22,9 @@ import com.mark.likemovies.data.models.homeMovies.SingleMovie
 import com.mark.likemovies.ui.details.DetailsActivity
 import com.mark.moviesexpert.ui.movie.MoviePagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
@@ -44,15 +49,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
             movieAdapter.submitData(lifecycle, it)
         })
     }
-
-    fun initViews() {
-        homeRecyclerView = findViewById(R.id.recyclerview)
-        drawerLayout = findViewById<DrawerLayout>(R.id.drawerlayout)
-        toolbar = findViewById<View>(R.id.toolbar2) as Toolbar
-        setSupportActionBar(toolbar)
-    }
-
-    private fun setupMainRv() {
+    fun setupMainRv() {
         val layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val snapHelper: SnapHelper = PagerSnapHelper()
@@ -62,13 +59,30 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
         homeRecyclerView.adapter = movieAdapter
 
     }
+    fun initViews() {
+        homeRecyclerView = findViewById(R.id.recyclerview)
+        drawerLayout = findViewById<DrawerLayout>(R.id.drawerlayout)
+        toolbar = findViewById<View>(R.id.toolbar2) as Toolbar
+        setSupportActionBar(toolbar)
+        movieAdapter.setOnItemClickListener(object : MoviePagingAdapter.OnItemClicked {
+
+
+            override fun onItemClick(position: Int, fileId: String, item: SingleMovie?) {
+                if (fileId == "details") {
+                    val intent = Intent(this@HomeActivity, DetailsActivity::class.java)
+                    intent.putExtra("data", item)
+                    startActivity(intent)
+                }
+
+
+            }
+        })
+
+
+    }
 
     override fun onItemClick(position: Int, fileId: String, item: SingleMovie?) {
-        if (fileId=="details"){
-            val intent = Intent(this, DetailsActivity::class.java)
-            intent.putExtra("data", item)
-            startActivity(intent)
-        }
+        TODO("Not yet implemented")
     }
 }
 

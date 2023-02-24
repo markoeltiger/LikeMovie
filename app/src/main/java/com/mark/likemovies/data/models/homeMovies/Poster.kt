@@ -1,6 +1,7 @@
 package com.mark.likemovies.data.models.homeMovies
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class Poster(
@@ -10,4 +11,4 @@ data class Poster(
     val id: Int,
     @SerializedName("image")
     val image: String
-)
+): Serializable

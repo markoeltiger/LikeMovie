@@ -1,6 +1,7 @@
 package com.mark.likemovies.data.models.homeMovies
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class Cast(
@@ -10,4 +11,4 @@ data class Cast(
     val image: String,
     @SerializedName("name")
     val name: String
-)
+): Serializable
