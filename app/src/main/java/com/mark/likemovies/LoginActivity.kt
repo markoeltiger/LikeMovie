@@ -24,11 +24,11 @@ import com.mark.likemovies.ui.auth.AuthViewModel
 import com.mark.likemovies.ui.home.HomeActivity
 import com.mark.likemovies.util.Constants
 import com.shashank.sony.fancytoastlib.FancyToast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-private lateinit var auth: FirebaseAuth
-
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private var inputEmail: EditText? = null
     private var inputPassword: EditText? = null
@@ -84,6 +84,7 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(HomeIntent)
                         }
                     } catch (e: Exception) {
+                        Log.e("yarap","${e.toString()}")
                         FancyToast.makeText(
                             this@LoginActivity,
                             "هناك خطأ في تسجيل الدخول برجاء مراجعة البيانات",
