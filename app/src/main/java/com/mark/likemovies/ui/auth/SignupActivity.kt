@@ -1,4 +1,4 @@
-package com.mark.likemovies
+package com.mark.likemovies.ui.auth
 
 import android.content.Context
 import android.content.Intent
@@ -14,6 +14,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
+import com.mark.likemovies.R
 
 import com.mark.likemovies.ui.auth.AuthViewModel
 import com.mark.likemovies.ui.home.HomeActivity
@@ -88,6 +89,7 @@ class SignupActivity : AppCompatActivity() {
                 editor.putString("username","${response.body()?.data?.name}")
                 editor.putString("email","${response.body()?.data?.email}")
                 editor.putString("id","${response.body()?.data?.id}")
+                editor.putBoolean("logged", true)
                 editor.apply()
                 var HomeIntent = Intent(this@SignupActivity,HomeActivity::class.java)
                 startActivity(HomeIntent)

@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mark.likemovies.LoginActivity;
+import com.mark.likemovies.ui.auth.LoginActivity;
 import com.mark.likemovies.Models.EntertainmentMoviesResponse.Data;
 import com.mark.likemovies.MovieDetails;
 import com.mark.likemovies.R;

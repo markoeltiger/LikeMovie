@@ -36,11 +36,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mark.likemovies.Adapter.MovieListAdapter;
 import com.mark.likemovies.Client.ApiClient;
-import com.mark.likemovies.Models.API.Page;
 import com.mark.likemovies.Models.APImodel;
 import com.mark.likemovies.Models.Data;
-import com.mark.likemovies.Models.Item;
-import com.mark.likemovies.Models.Movie;
+import com.mark.likemovies.ui.auth.LoginActivity;
 import com.mark.likemovies.util.Constants;
 
 import java.util.Collections;
@@ -123,7 +121,7 @@ snapHelper.attachToRecyclerView(recyclerView);
 
                     System.out.print(id);
                     if (id == R.id.Nav_Logins) {
-                        Intent loginintent =new Intent(MainActivity.this,LoginActivity.class);
+                        Intent loginintent =new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(loginintent);
                     }
                     if (id == R.id.Nav_signups) {

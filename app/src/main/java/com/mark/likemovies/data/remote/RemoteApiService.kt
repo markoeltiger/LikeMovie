@@ -1,6 +1,7 @@
 package com.mark.likemovies.data.remote
 
 import com.mark.likemovies.Models.APImodel
+import com.mark.likemovies.data.models.ReactionResponse.ReactionResponse
 import com.mark.likemovies.data.models.homeMovies.HomeMoviesResponse
 import com.mark.likemovies.data.models.register.RegisterResponse
 import com.mark.likemovies.util.Constants
@@ -21,6 +22,15 @@ interface RemoteApiService {
         @Query("password") password: String?,
         @Query("password_confirmation") password_confirmation: String?,
         ): Response<RegisterResponse>
+    @Headers("Accept: application/json",
+        "Content-Type: application/json")
+    @POST(Constants.REGISTER_ENDPOINT)
+    suspend fun React(
+        @Query("un") un: Int?,
+        @Query("reaction") reaction: String?,
+        @Query("user_id") user_id: Int?,
+        @Query("entertainment_id") entertainment_id: Int?,
+    ): Response<ReactionResponse>
 
     @Headers("Accept: application/json",
         "Content-Type: application/json")

@@ -1,26 +1,16 @@
-package com.mark.likemovies
+package com.mark.likemovies.ui.auth
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.graphics.Color
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.service.controls.ControlsProviderService.TAG
 import android.text.TextUtils
-import android.util.Log
-import android.view.View
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.mark.likemovies.ui.auth.AuthViewModel
+import com.mark.likemovies.R
 import com.mark.likemovies.ui.home.HomeActivity
 import com.mark.likemovies.util.Constants
 import com.shashank.sony.fancytoastlib.FancyToast
@@ -79,12 +69,13 @@ class LoginActivity : AppCompatActivity() {
                             editor.putString("username", "${response.body()?.data?.name}")
                             editor.putString("email", "${response.body()?.data?.email}")
                             editor.putString("id", "${response.body()?.data?.id}")
+                            editor.putBoolean("logged", true)
+
                             editor.apply()
                             var HomeIntent = Intent(this@LoginActivity, HomeActivity::class.java)
                             startActivity(HomeIntent)
                         }
                     } catch (e: Exception) {
-                        Log.e("yarap","${e.toString()}")
                         FancyToast.makeText(
                             this@LoginActivity,
                             "هناك خطأ في تسجيل الدخول برجاء مراجعة البيانات",
@@ -102,7 +93,3 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
-
-
-
-

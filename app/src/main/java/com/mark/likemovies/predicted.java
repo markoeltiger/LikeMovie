@@ -35,18 +35,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.mark.likemovies.Adapter.MovieListAdapter;
 import com.mark.likemovies.Adapter.MoviepredictedListAdapter;
 import com.mark.likemovies.Client.ApiClient;
-import com.mark.likemovies.Models.Item;
-import com.mark.likemovies.Models.Movie;
 import com.mark.likemovies.Models.predictedmovie;
 import com.mark.likemovies.Models.preidecteitem;
-import com.mark.likemovies.R;
+import com.mark.likemovies.ui.auth.LoginActivity;
+import com.mark.likemovies.ui.auth.SignupActivity;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -153,7 +149,7 @@ int position=0;
                         startActivity(loginintent);
                     }
                     if (id == R.id.Nav_signups) {
-                        Intent signupintent =new Intent(predicted.this,SignupActivity.class);
+                        Intent signupintent =new Intent(predicted.this, SignupActivity.class);
                         startActivity(signupintent);
                     }
                     return false;
