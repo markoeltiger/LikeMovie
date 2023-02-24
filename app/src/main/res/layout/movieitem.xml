@@ -10,8 +10,8 @@
         android:id="@+id/mymoviposter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="75dp"
         android:scaleType="centerCrop"
-android:layout_marginBottom="75dp"
         app:layout_constraintBottom_toTopOf="@+id/controllayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,9 +23,9 @@ android:layout_marginBottom="75dp"
         android:layout_height="60dp"
 
 
-        android:background="@drawable/infologo"
+        android:layout_marginBottom="55dp"
 
- android:layout_marginBottom="55dp"
+        android:background="@drawable/infologo"
         app:layout_constraintBottom_toBottomOf="@+id/controllayout"
         app:layout_constraintEnd_toEndOf="@+id/controllayout"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,9 +45,9 @@ android:layout_marginBottom="75dp"
             android:layout_weight="1"
             android:background="@color/green"
             android:text="Good"
-            android:textStyle="bold"
             android:textColor="@color/white"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
 
         <!--            <TextView-->
@@ -69,9 +69,9 @@ android:layout_marginBottom="75dp"
             android:layout_weight="1"
             android:background="@color/yellow"
             android:text="Bad"
-            android:textStyle="bold"
             android:textColor="@color/white"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>
