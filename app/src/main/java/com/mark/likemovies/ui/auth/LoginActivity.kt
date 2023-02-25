@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import com.mark.likemovies.ui.home.HomeActivity
 import com.mark.likemovies.util.Constants
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_login2.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -23,6 +25,8 @@ class LoginActivity : AppCompatActivity() {
     private var inputEmail: EditText? = null
     private var inputPassword: EditText? = null
     private var btnSignIn: Button? = null
+    private var button_signup: TextView? = null
+
     val viewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +36,10 @@ class LoginActivity : AppCompatActivity() {
         inputEmail = findViewById(R.id.et_username) as EditText
         inputPassword = findViewById(R.id.et_password) as EditText
         btnSignIn = findViewById(R.id.button_signin) as Button
+        button_signup = findViewById(R.id.button_signup) as TextView
+        button_signup!!.setOnClickListener {var intent = Intent(this,SignupActivity::class.java)
+        startActivity(intent)}
+
         btnSignIn!!.setOnClickListener {
             val email = inputEmail!!.text.toString().trim()
             val password = inputPassword!!.text.toString().trim()

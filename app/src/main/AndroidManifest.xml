@@ -26,7 +26,7 @@
             android:name=".Subscribe"
             android:exported="false" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".ui.auth.SignupActivity"
             android:exported="true"></activity>
         <activity
             android:name=".ui.auth.LoginActivity"
