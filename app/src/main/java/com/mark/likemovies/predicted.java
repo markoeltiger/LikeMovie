@@ -41,6 +41,7 @@ import com.mark.likemovies.Models.predictedmovie;
 import com.mark.likemovies.Models.preidecteitem;
 import com.mark.likemovies.ui.auth.LoginActivity;
 import com.mark.likemovies.ui.auth.SignupActivity;
+import com.mark.likemovies.ui.filter.FilterActivity;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.List;
@@ -77,7 +78,7 @@ int position=0;
         int id = item.getItemId();
 
         if (id == R.id.idea) {
-            if (isloggedin()){        Intent idea = new Intent(predicted.this,FilterActivity.class);
+            if (isloggedin()){        Intent idea = new Intent(predicted.this, FilterActivity.class);
                 startActivity(idea);
                 return true;}else{
 

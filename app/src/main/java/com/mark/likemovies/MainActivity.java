@@ -40,6 +40,7 @@ import com.mark.likemovies.Models.APImodel;
 import com.mark.likemovies.Models.Data;
 import com.mark.likemovies.ui.auth.LoginActivity;
 import com.mark.likemovies.ui.auth.SignupActivity;
+import com.mark.likemovies.ui.filter.FilterActivity;
 import com.mark.likemovies.util.Constants;
 
 import java.util.Collections;
@@ -79,7 +80,7 @@ MovieListAdapter recyclerAdapter;
         int id = item.getItemId();
 
         if (id == R.id.idea) {
-           Intent idea = new Intent(MainActivity.this,FilterActivity.class);
+           Intent idea = new Intent(MainActivity.this, FilterActivity.class);
            startActivity(idea);
             return true;
         }

@@ -1,6 +1,7 @@
 package com.mark.likemovies.data.remote
 
 import com.mark.likemovies.Models.APImodel
+import com.mark.likemovies.Models.suggestions.SuggestionsResponse
 import com.mark.likemovies.data.models.ReactionResponse.ReactionResponse
 import com.mark.likemovies.data.models.homeMovies.HomeMoviesResponse
 import com.mark.likemovies.data.models.register.RegisterResponse
@@ -44,4 +45,18 @@ interface RemoteApiService {
     @GET(Constants.MAIN_ENTERTAINMENT_ENDPOINT)
     suspend  fun getMoviesFromAPI():
          Response<HomeMoviesResponse>
+    @GET(Constants.SUGGESTION_ENDPOINT)
+    suspend fun getSuggestions(
+
+        @Query("user_id ") user_id: String,
+        @Query("page") page: String,
+        @Query("genre") genre: String,
+        @Query("country") country: String,
+        @Query("from") from: String,
+        @Query("to") to: String,
+
+
+        )
+            : Response<SuggestionsResponse>
+
 }

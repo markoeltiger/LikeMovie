@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.google.android.material.navigation.NavigationView
-import com.mark.likemovies.FilterActivity
+import com.mark.likemovies.ui.filter.FilterActivity
 import com.mark.likemovies.R
 import com.mark.likemovies.Subscribe
 import com.mark.likemovies.data.models.homeMovies.SingleMovie
@@ -109,6 +109,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
         }
         return super.onOptionsItemSelected(item)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -233,6 +234,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
 
 
     }
+
     fun setupNavigationDrawer() {
         if (!isloggedin()) {
             navigationView?.inflateMenu(R.menu.notloggedin)
@@ -261,14 +263,14 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
                 val id = item.itemId
                 if (id == R.id.Nav_home) {
 
-                        if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
-                            drawerLayout.closeDrawer(Gravity.RIGHT)
-                        } else {
-                            drawerLayout.openDrawer(Gravity.RIGHT)
-                        }
+                    if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                        drawerLayout.closeDrawer(Gravity.RIGHT)
+                    } else {
+                        drawerLayout.openDrawer(Gravity.RIGHT)
+                    }
 
                 }
-                 if (id == R.id.Nav_likes) {
+                if (id == R.id.Nav_likes) {
                     val likesintent = Intent(
                         this,
                         likedmovies::class.java
@@ -314,7 +316,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
             R.string.closeNavigation
         ) {
             override fun onOptionsItemSelected(item: MenuItem): Boolean {
-                 if (item != null && item.itemId == android.R.id.home) {
+                if (item != null && item.itemId == android.R.id.home) {
                     if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
                         drawerLayout.closeDrawer(Gravity.RIGHT)
                     } else {
