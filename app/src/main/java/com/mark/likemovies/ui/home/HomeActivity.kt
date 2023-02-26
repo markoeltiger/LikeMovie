@@ -340,7 +340,7 @@ class HomeActivity : AppCompatActivity(), MoviePagingAdapter.OnItemClicked {
         var logged = false
         logged = sharedpreferences.getBoolean("logged", false)
         if (logged) {
-            user_id = sharedpreferences.getString("id", "0")?.toInt()!!
+                user_id = sharedpreferences.getString("id", "0")?.toInt()!!
             user_email = sharedpreferences.getString("email", "guest@gooodbad.com")!!
             user_name = sharedpreferences.getString("username", "Guest")!!
 

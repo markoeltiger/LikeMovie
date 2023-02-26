@@ -82,7 +82,6 @@ class DetailsActivity : AppCompatActivity() {
         MovieGenre.text = currentData.genresAr
         MovieRate.setText("${currentData.rating}   / 10")
         this.setTitle(currentData.releaseYear.toString())
-
     }
 
     fun setTaps() {
