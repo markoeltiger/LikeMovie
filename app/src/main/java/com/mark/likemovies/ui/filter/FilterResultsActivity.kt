@@ -31,10 +31,9 @@ class FilterResultsActivity : AppCompatActivity() {
     lateinit var LikeMovie: Button
     lateinit var DisLikeMovie: Button
     lateinit var  Details: TextView
-    lateinit var currentMovie : SingleMovie
     var user_id: Int =1
     var CurrentMoviePage: Int =0
-
+    lateinit var likeReactResponse :SingleMovie
     val viewModel: FilterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +53,7 @@ class FilterResultsActivity : AppCompatActivity() {
         Details = findViewById<Button>(R.id.moreDetails)
         Details.setOnClickListener {
             val intent = Intent(this, DetailsActivity::class.java)
-            intent.putExtra("data", currentMovie)
+            intent.putExtra("data", likeReactResponse)
             startActivity(intent)
         }
 
@@ -63,11 +62,10 @@ class FilterResultsActivity : AppCompatActivity() {
     private fun getCurrentMovie() {
         lifecycleScope.launch(Dispatchers.Main) {
             try {
-                var likeReactResponse =
-                    viewModel.getSuggestion(user_id = user_id, CurrentMoviePage, genre, country, year, "2022")
-                if (likeReactResponse.isSuccessful) {
-                    currentMovie= likeReactResponse.body()!!
-                    Picasso.get().load(likeReactResponse.body()?.posters?.get(0)?.image).placeholder(R.drawable.app_logo_2)
+                  likeReactResponse =
+                      viewModel.getSuggestion(user_id = user_id, CurrentMoviePage, genre, country, year, "2022").body()!!
+                if (likeReactResponse.id!=null) {
+                    Picasso.get().load(likeReactResponse?.posters?.get(0)?.image).placeholder(R.drawable.app_logo_2)
                         .into(MoviePoster)
 
                  }
