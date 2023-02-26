@@ -13,7 +13,7 @@ class FilterRepo @Inject constructor(
     private val apiService: RemoteApiService
 ){
 
-    suspend fun getSuggestion(user_id:String,page:String,genre:String,country:String,from:String,to:String): Response<SuggestionsResponse> {
+    suspend fun getSuggestion(user_id:Int,page:String,genre:String,country:String,from:String,to:String): Response<SuggestionsResponse> {
         return apiService.getSuggestions(user_id,page, genre,  country,from, to)
     }
 }

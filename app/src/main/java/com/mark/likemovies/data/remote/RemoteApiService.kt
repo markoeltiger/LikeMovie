@@ -48,7 +48,7 @@ interface RemoteApiService {
     @GET(Constants.SUGGESTION_ENDPOINT)
     suspend fun getSuggestions(
 
-        @Query("user_id ") user_id: String,
+        @Query("user_id") user_id: Int,
         @Query("page") page: String,
         @Query("genre") genre: String,
         @Query("country") country: String,

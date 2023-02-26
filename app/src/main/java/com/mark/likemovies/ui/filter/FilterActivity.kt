@@ -9,7 +9,9 @@ import androidx.appcompat.widget.Toolbar
 import com.mark.likemovies.R
 import com.shashank.sony.fancytoastlib.FancyToast
 import com.skydoves.powerspinner.PowerSpinnerView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FilterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,7 @@ class FilterActivity : AppCompatActivity() {
         applybutton.setOnClickListener {
 
             intent = Intent(this, FilterResultsActivity::class.java)
-            intent.putExtra("country",Counties.get(countrySpinner.selectedIndex))
+            intent.putExtra("country","Untited States")
             intent.putExtra("genre",Genres.get(typeSpinner.selectedIndex))
             intent.putExtra("year",Years.get(yearSpinner.selectedIndex))
 
