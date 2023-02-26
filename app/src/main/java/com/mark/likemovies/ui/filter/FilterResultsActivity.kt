@@ -12,6 +12,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.mark.likemovies.R
+import com.mark.likemovies.data.models.homeMovies.SingleMovie
+import com.mark.likemovies.ui.details.DetailsActivity
 import com.mark.likemovies.util.Constants
 import com.shashank.sony.fancytoastlib.FancyToast
 import com.squareup.picasso.Picasso
@@ -29,7 +31,10 @@ class FilterResultsActivity : AppCompatActivity() {
     lateinit var LikeMovie: Button
     lateinit var DisLikeMovie: Button
     lateinit var  Details: TextView
-    var user_id: Int =0
+    lateinit var currentMovie : SingleMovie
+    var user_id: Int =1
+    var CurrentMoviePage: Int =0
+
     val viewModel: FilterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,15 +51,23 @@ class FilterResultsActivity : AppCompatActivity() {
         MoviePoster = findViewById<ImageView>(R.id.mymoviposter)
         LikeMovie = findViewById<Button>(R.id.likeMovieImage)
         DisLikeMovie = findViewById<Button>(R.id.unikeMovieImage)
-        Details = findViewById<Button>(R.id.moreDetails)    }
+        Details = findViewById<Button>(R.id.moreDetails)
+        Details.setOnClickListener {
+            val intent = Intent(this, DetailsActivity::class.java)
+            intent.putExtra("data", currentMovie)
+            startActivity(intent)
+        }
+
+    }
 
     private fun getCurrentMovie() {
         lifecycleScope.launch(Dispatchers.Main) {
             try {
                 var likeReactResponse =
-                    viewModel.getSuggestion(user_id = user_id, "1", "drama", "usa", "2000", "2001")
+                    viewModel.getSuggestion(user_id = user_id, CurrentMoviePage, genre, country, year, "2022")
                 if (likeReactResponse.isSuccessful) {
-                    Picasso.get().load(likeReactResponse.body()?.data?.posters?.get(0)?.image).placeholder(R.drawable.app_logo_2)
+                    currentMovie= likeReactResponse.body()!!
+                    Picasso.get().load(likeReactResponse.body()?.posters?.get(0)?.image).placeholder(R.drawable.app_logo_2)
                         .into(MoviePoster)
 
                  }
